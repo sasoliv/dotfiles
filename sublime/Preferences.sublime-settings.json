@@ -1,0 +1,18 @@
+{
+    "always_show_minimap_viewport": true,
+    "color_scheme": "Packages/Darkula Color Scheme/darkula.tmTheme",
+    "drag_text": false,
+    "draw_minimap_border": true,
+    "enable_hexadecimal_encoding": false,
+    "font_size": 10,
+    "highlight_line": true,
+    "highlight_modified_tabs": true,
+    "ignored_packages":
+    [
+        "Vintage",
+    ],
+    "tab_completion": false,    
+    "translate_tabs_to_spaces": true,
+    "word_wrap": false,
+    "theme": "Ultimate Dark Neo.sublime-theme",
+}
