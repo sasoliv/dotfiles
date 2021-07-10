@@ -48,8 +48,8 @@ use_color=true
 #########################################
 #########################################
 #########################################
-source /home/saso/sources/git/contrib/completion/git-completion.bash
-source /home/saso/sources/git/contrib/completion/git-prompt.sh
+source ~/sources/git/contrib/completion/git-completion.bash
+source ~/sources/git/contrib/completion/git-prompt.sh
 export GIT_PS1_SHOWDIRTYSTATE=1
 #########################################
 #########################################
