@@ -1,0 +1,20 @@
+{
+	"always_show_minimap_viewport": true,
+	"color_scheme": "Packages/Darkula Color Scheme/darkula.tmTheme",
+	"drag_text": false,
+	"draw_minimap_border": true,
+	"font_size": 9,
+	"highlight_line": true,
+	"highlight_modified_tabs": true,
+	"ignored_packages":
+	[
+		"Vintage",
+	],
+	"translate_tabs_to_spaces": true,
+	"word_wrap": false,
+	"theme": "Cyanide - Salmon.sublime-theme",
+	"caret_style": "smooth",
+	"caret_extra_top": 0,
+	"caret_extra_bottom": 0,
+	"caret_extra_width": 0,
+}
