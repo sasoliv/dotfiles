@@ -2,6 +2,8 @@
 [keybindings]
 [profiles]
   [[default]]
+    background_darkness = 0.9
+    background_type = transparent
     cursor_shape = ibeam
     cursor_color = "#aaaaaa"
     font = Monospace 8
