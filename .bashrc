@@ -148,5 +148,5 @@ ex ()
   fi
 }
 
+alias cdd='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
 #eval "$(starship init bash)"
-
