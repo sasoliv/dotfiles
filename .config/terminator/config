@@ -6,7 +6,7 @@
     background_type = transparent
     cursor_shape = ibeam
     cursor_color = "#aaaaaa"
-    font = Monospace 8
+    font = mononoki Nerd Font 8
     show_titlebar = False
     scrollbar_position = hidden
     use_system_font = False
