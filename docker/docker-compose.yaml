@@ -48,3 +48,14 @@ services:
       - 7359:7359/udp
     restart: unless-stopped
 
+  filebrowser:
+    image: filebrowser/filebrowser
+    container_name: filebrowser
+    user: 1000:1000
+    volumes:
+      - /mnt/hdd:/srv
+      - /mnt/hdd/config/filebrowser.db:/database.db
+    ports:
+      - 8100:80
+    restart: unless-stopped
+
