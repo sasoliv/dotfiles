@@ -5,6 +5,7 @@ services:
     image: nginx-pi
     build:
       context: ./pi-dashboard
+    container_name: nginx-pi
     ports:
       - 80:80
     restart: unless-stopped
