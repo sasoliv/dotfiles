@@ -1,5 +1,14 @@
 version: "3.5"
 services:
+
+  nginx-pi:
+    image: nginx-pi
+    build:
+      context: ./pi-dashboard
+    ports:
+      - 80:80
+    restart: unless-stopped
+
   portainer:
     image: portainer/portainer-ce
     container_name: portainer
