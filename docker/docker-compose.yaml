@@ -21,6 +21,17 @@ services:
       - 9000:9000
     restart: unless-stopped
 
+  prometheus:
+    image: prometheus-local
+    build:
+      context: ./prometheus
+    container_name: prometheus
+    volumes:
+      - prometheus-data:/prometheus
+    ports:
+      - 9090:9090
+    restart: unless-stopped
+
   qbittorrent:
     image: linuxserver/qbittorrent
     container_name: qbittorrent
@@ -68,4 +79,7 @@ services:
 
 volumes:
   portainer_data:
+    driver: local
+  prometheus-data:
+    driver: local
 
