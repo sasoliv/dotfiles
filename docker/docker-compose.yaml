@@ -41,6 +41,27 @@ services:
       - 3000:3000
     restart: unless-stopped
 
+  node-exporter:
+    image: quay.io/prometheus/node-exporter:latest
+    container_name: node-exporter
+    command:
+      - '--path.rootfs=/host'
+    volumes:
+      - '/:/host:ro,rslave'
+    restart: unless-stopped
+
+  cadvisor:
+    image: braingamer/cadvisor-arm
+    container_name: cadvisor
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+      - /dev/disk/:/dev/disk:ro
+    devices:
+      - /dev/kmsg
+
   qbittorrent:
     image: linuxserver/qbittorrent
     container_name: qbittorrent
