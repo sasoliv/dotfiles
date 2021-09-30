@@ -13,12 +13,9 @@ services:
   portainer:
     image: portainer/portainer-ce
     container_name: portainer
-    environment:
-      - PUID=1000
-      - PGID=1000
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - /mnt/hdd/config/portainer_data:/data
+      - portainer_data:/data
     ports:
       - 8000:8000
       - 9000:9000
@@ -68,4 +65,7 @@ services:
     ports:
       - 8100:80
     restart: unless-stopped
+
+volumes:
+  portainer_data:
 
