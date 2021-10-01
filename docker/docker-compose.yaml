@@ -1,11 +1,15 @@
 version: "3.5"
 services:
 
-  nginx:
-    image: nginx-local
-    build:
-      context: ./dashboard
-    container_name: nginx
+  heimdall:
+    image: linuxserver/heimdall
+    container_name: heimdall
+    volumes:
+      - /mnt/hdd/config/heimdall:/config
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Lisbon
     ports:
       - 80:80
     restart: unless-stopped
