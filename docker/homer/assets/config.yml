@@ -1,0 +1,67 @@
+title: "dashboard"
+subtitle: "pi"
+
+icon: "fab fa-raspberry-pi" # Optional icon
+
+header: true
+footer: 'pi dashboard'
+
+theme: dark
+colors:
+  light:
+    highlight-primary: "#3367d6"
+    highlight-secondary: "#4285f4"
+    highlight-hover: "#5a95f5"
+    background: "#f5f5f5"
+    card-background: "#ffffff"
+    text: "#363636"
+    text-header: "#ffffff"
+    text-title: "#303030"
+    text-subtitle: "#424242"
+    card-shadow: rgba(0, 0, 0, 0.1)
+    link-hover: "#363636"
+  dark:
+    highlight-primary: "#131313"
+    highlight-secondary: "#444444"
+    highlight-hover: "#444444"
+    background: "#131313"
+    card-background: "#2b2b2b"
+    text: "#eaeaea"
+    text-header: "#ffffff"
+    text-title: "#fafafa"
+    text-subtitle: "#f5f5f5"
+    card-shadow: rgba(0, 0, 0, 0.4)
+    link-hover: "#444444"
+
+
+
+services:
+  - name: "Apps"
+    icon: "fas fa-laptop"
+    items:
+      - name: "qBittorrent"
+        logo: "assets/tools/qbittorrent.png"
+        tag: "app"
+        url: "http://pi:8090"
+        target: "_blank"
+      - name: "Jellyfin"
+        logo: "assets/tools/jellyfin.png"
+        tag: "app"
+        url: "http://pi:8096"
+      - name: "File Browser"
+        logo: "assets/tools/filebrowser.png"
+        tag: "app"
+        url: "http://pi:3000"
+
+  - name: "Admin"
+    icon: "fas fa-user-cog"
+    items:
+      - name: "Portainer"
+        logo: "assets/tools/portainer.png"
+        tag: "admin"
+        url: "http://pi:9000"
+        target: "_blank"
+      - name: "Grafana"
+        logo: "assets/tools/grafana.png"
+        tag: "admin"
+        url: "http://pi:3000"

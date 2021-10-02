@@ -1,19 +1,18 @@
 version: "3.5"
 services:
 
-  heimdall:
-    image: heimdall-local
+  homer:
+    image: homer-local
     build:
-      context: ./heimdall
-    container_name: heimdall
-    volumes:
-      - /mnt/hdd/config/heimdall:/config
+      context: ./homer
+    container_name: homer
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/Lisbon
+      - UID=1000
+      - GID=1000
+    volumes:
+      - homer-data:/www/assets
     ports:
-      - 80:80
+      - 80:8080
     restart: unless-stopped
 
   portainer:
@@ -67,6 +66,7 @@ services:
       - /dev/disk/:/dev/disk:ro
     devices:
       - /dev/kmsg
+    restart: unless-stopped
 
   qbittorrent:
     image: linuxserver/qbittorrent
@@ -119,5 +119,7 @@ volumes:
   prometheus-data:
     driver: local
   grafana-data:
+    driver: local
+  homer-data:
     driver: local
 
