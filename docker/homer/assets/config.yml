@@ -48,10 +48,12 @@ services:
         logo: "assets/tools/jellyfin.png"
         tag: "app"
         url: "http://pi:8096"
+        target: "_bank"
       - name: "File Browser"
         logo: "assets/tools/filebrowser.png"
         tag: "app"
-        url: "http://pi:3000"
+        url: "http://pi:8100"
+        target: "_bank"
 
   - name: "Admin"
     icon: "fas fa-user-cog"
@@ -65,3 +67,5 @@ services:
         logo: "assets/tools/grafana.png"
         tag: "admin"
         url: "http://pi:3000"
+        target: "_bank"
+
