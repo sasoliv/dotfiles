@@ -74,7 +74,6 @@ services:
     environment:
       TZ: Europe/Lisbon
       WEBPASSWORD: changeme
-    user: 1000:1000
     volumes:
       - /mnt/data/config/pihole/etc-pihole/:/etc/pihole/
       - /mnt/data/config/pihole/etc-dnsmasq.d/:/etc/dnsmasq.d/

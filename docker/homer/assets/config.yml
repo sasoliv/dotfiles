@@ -71,5 +71,5 @@ services:
       - name: "Pi-hole"
         logo: "assets/tools/pihole.png"
         tag: "admin"
-        url: "http://pi:81"
+        url: "http://pi:81/admin"
         target: "_bank"
