@@ -68,6 +68,25 @@ services:
       - /dev/kmsg
     restart: unless-stopped
 
+  pihole:
+    image: pihole/pihole
+    container_name: pihole
+    environment:
+      TZ: Europe/Lisbon
+      WEBPASSWORD: changeme
+    user: 1000:1000
+    volumes:
+      - /mnt/data/config/pihole/etc-pihole/:/etc/pihole/
+      - /mnt/data/config/pihole/etc-dnsmasq.d/:/etc/dnsmasq.d/
+    ports:
+      - 53:53/tcp
+      - 53:53/udp
+      - 67:67/udp
+      - 81:80/tcp
+    cap_add:
+      - NET_ADMIN
+    restart: unless-stopped
+
   qbittorrent:
     image: linuxserver/qbittorrent
     container_name: qbittorrent

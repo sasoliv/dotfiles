@@ -68,4 +68,8 @@ services:
         tag: "admin"
         url: "http://pi:3000"
         target: "_bank"
-
+      - name: "Pi-hole"
+        logo: "assets/tools/pihole.png"
+        tag: "admin"
+        url: "http://pi:81"
+        target: "_bank"
