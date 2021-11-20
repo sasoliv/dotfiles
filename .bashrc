@@ -118,6 +118,7 @@ fi
 
 alias cdd='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
 alias ll='exa -la --group --group-directories-first'
+alias catt='batcat'
 
 neofetch
 
