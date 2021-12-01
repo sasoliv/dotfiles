@@ -5,8 +5,6 @@ set showmatch
 set ignorecase
 set cursorline
 
-highlight CursorLine ctermbg=DarkGrey
-
-highlight LineNr ctermbg=DarkGrey ctermfg=White
-highlight CursorLineNr ctermbg=DarkGrey ctermfg=White
+highlight LineNr ctermbg=Black
+highlight CursorLineNr ctermbg=Black
 
