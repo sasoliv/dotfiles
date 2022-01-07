@@ -1,0 +1,12 @@
+[Unit]
+Description=Listens to GPIO 3
+After=multi-user.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python /usr/local/bin/listen-gpio3.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+
