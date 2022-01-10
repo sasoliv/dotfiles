@@ -71,6 +71,7 @@ services:
   pihole:
     image: pihole/pihole
     container_name: pihole
+    hostname: pi-pihole
     environment:
       TZ: Europe/Lisbon
       WEBPASSWORD: changeme
@@ -106,6 +107,7 @@ services:
   jellyfin:
     image: jellyfin/jellyfin
     container_name: jellyfin
+    hostname: pi-jellyfin
     environment:
       - JELLYFIN_PublishedServerUrl=http://pi:8096
     user: 1000:1000    
