@@ -135,6 +135,20 @@ services:
       - 8100:80
     restart: unless-stopped
 
+  mosquitto:
+    image: mosquitto-local
+    build:
+      context: ./mosquitto
+    container_name: mosquitto
+    user: 1000:1000
+    volumes:
+        - /mnt/data/config/mosquitto/data:/mosquitto/data/
+        - /mnt/data/config/mosquitto/log:/mosquitto/log/
+    ports:
+        - 1883:1883
+        - 9001:9001
+    restart: unless-stopped
+
 volumes:
   homer-data:
     driver: local
