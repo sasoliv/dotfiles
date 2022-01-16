@@ -41,12 +41,12 @@ def exec(cmd):
 
 def set_pc_mode():
     log("set_pc_mode")
-    exec("/home/saso/tools/mode-switcher/set-pc-mode")
+    exec("set-pc-mode")
 
 
 def set_console_mode():
     log("set_console_mode")
-    exec("/home/saso/tools/mode-switcher/set-console-mode")
+    exec("set-console-mode")
 
 
 if __name__ == '__main__':

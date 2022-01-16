@@ -3,7 +3,7 @@ Description=Listens to manjaro/mode topic on pi's mosquito MQTT broker
 
 [Service]
 Type=simple
-ExecStart=/home/saso/tools/mode-switcher/mode-switcher
+ExecStart=start-mode-switcher-listener
 Restart=always
 
 [Install]
