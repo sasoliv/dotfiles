@@ -1,0 +1,47 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+import paho.mqtt.client as paho
+import subprocess
+import sys
+import time
+
+from datetime import datetime
+
+host = "pi"
+topic = "manjaro/poweroff"
+
+
+def nowStr():
+    return datetime.now().strftime("[%Y-%m-%d %H:%M:%S]")
+
+
+def log(*values):
+    print(nowStr(), *values)
+    sys.stdout.flush()
+
+
+def exec(cmd):
+    subprocess.call(cmd.split(), shell=False)
+
+
+def on_message(mosq, obj, msg):
+    log("shuting down...")
+    exec("poweroff")
+
+
+if __name__ == '__main__':
+
+    log("init...")
+
+    client = paho.Client()
+    client.on_message = on_message
+
+    client.connect(host, 1883, 60)
+
+    client.subscribe(topic, 0)
+
+    log("listening on " + topic)
+
+    while client.loop() == 0:
+        time.sleep(0)
