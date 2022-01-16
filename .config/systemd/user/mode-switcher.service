@@ -1,0 +1,10 @@
+[Unit]
+Description=Listens to manjaro/mode topic on pi's mosquito MQTT broker
+
+[Service]
+Type=simple
+ExecStart=/home/saso/tools/mode-switcher/mode-switcher
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

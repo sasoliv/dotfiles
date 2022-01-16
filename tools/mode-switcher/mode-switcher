@@ -1,0 +1,66 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+import paho.mqtt.client as paho
+import subprocess
+import sys
+import time
+
+from datetime import datetime
+
+host = "pi"
+topic = "manjaro/mode"
+
+modes = {
+    "pc": lambda _: set_pc_mode(),
+    "console": lambda _: set_console_mode()
+}
+
+
+def nowStr():
+    return datetime.now().strftime("[%Y-%m-%d %H:%M:%S]")
+
+
+def log(*values):
+    print(nowStr(), *values)
+    sys.stdout.flush()
+
+
+def on_message(mosq, obj, msg):
+    mode = msg.payload.decode("utf-8")
+    func = modes.get(mode)
+    if (func):
+        func(None)
+    else:
+        log("Mode not supported: " + mode)
+
+
+def exec(cmd):
+    subprocess.call(cmd.split(), shell=False)
+
+
+def set_pc_mode():
+    log("set_pc_mode")
+    exec("/home/saso/tools/mode-switcher/set-pc-mode")
+
+
+def set_console_mode():
+    log("set_console_mode")
+    exec("/home/saso/tools/mode-switcher/set-console-mode")
+
+
+if __name__ == '__main__':
+
+    log("init...")
+
+    client = paho.Client()
+    client.on_message = on_message
+
+    client.connect(host, 1883, 60)
+
+    client.subscribe(topic, 0)
+
+    log("listening...")
+
+    while client.loop() == 0:
+        time.sleep(0)
