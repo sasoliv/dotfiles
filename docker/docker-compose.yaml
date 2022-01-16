@@ -20,7 +20,7 @@ services:
     container_name: portainer
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - portainer_data:/data
+      - /mnt/data/config/portrainer/data:/data
     ports:
       - 8000:8000
       - 9000:9000
@@ -31,8 +31,9 @@ services:
     build:
       context: ./prometheus
     container_name: prometheus
+    user: 1000:1000
     volumes:
-      - prometheus-data:/prometheus
+      - /mnt/data/config/prometheus:/prometheus
     ports:
       - 9090:9090
     restart: unless-stopped
@@ -40,8 +41,9 @@ services:
   grafana:
     image: grafana/grafana
     container_name: grafana
+    user: 1000:1000
     volumes:
-      - grafana-data:/var/lib/grafana
+      - /mnt/data/config/grafana:/var/lib/grafana
     ports:
       - 3000:3000
     restart: unless-stopped
@@ -134,12 +136,6 @@ services:
     restart: unless-stopped
 
 volumes:
-  portainer_data:
-    driver: local
-  prometheus-data:
-    driver: local
-  grafana-data:
-    driver: local
   homer-data:
     driver: local
 
