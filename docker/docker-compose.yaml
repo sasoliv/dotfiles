@@ -20,7 +20,7 @@ services:
     container_name: portainer
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - /mnt/data/config/portrainer/data:/data
+      - /mnt/data/config/portainer/data:/data
     ports:
       - 8000:8000
       - 9000:9000
