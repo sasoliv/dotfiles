@@ -13,8 +13,12 @@ topic = "manjaro/mode"
 
 modes = {
     "pc": lambda _: set_pc_mode(),
-    "console": lambda _: set_console_mode()
+    "console": lambda _: set_console_mode(),
+    "all": lambda _: set_all_mode()
 }
+
+gracePreriodSeconds = 3
+initTime = None
 
 
 def nowStr():
@@ -27,6 +31,10 @@ def log(*values):
 
 
 def on_message(mosq, obj, msg):
+    if((datetime.now() - initTime).total_seconds() < gracePreriodSeconds):
+        log('Ignoring message, Still in grace period')
+        return
+
     mode = msg.payload.decode("utf-8")
     func = modes.get(mode)
     if (func):
@@ -49,9 +57,15 @@ def set_console_mode():
     exec("set-console-mode")
 
 
+def set_all_mode():
+    log("set_all_mode")
+    exec("set-all-mode")
+
+
 if __name__ == '__main__':
 
     log("init...")
+    initTime = datetime.now()
 
     client = paho.Client()
     client.on_message = on_message

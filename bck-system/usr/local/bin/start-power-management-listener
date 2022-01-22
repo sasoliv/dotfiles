@@ -9,7 +9,15 @@ import time
 from datetime import datetime
 
 host = "pi"
-topic = "manjaro/poweroff"
+topic = "manjaro/power"
+
+modes = {
+    "poweroff": lambda _: poweroff(),
+    "reboot": lambda _: reboot(),
+}
+
+gracePreriodSeconds = 3
+initTime = None
 
 
 def nowStr():
@@ -21,18 +29,37 @@ def log(*values):
     sys.stdout.flush()
 
 
+def on_message(mosq, obj, msg):
+    if((datetime.now() - initTime).total_seconds() < gracePreriodSeconds):
+        log('Ignoring message, Still in grace period')
+        return
+
+    mode = msg.payload.decode("utf-8")
+    func = modes.get(mode)
+    if (func):
+        func(None)
+    else:
+        log("Mode not supported: " + mode)
+
+
 def exec(cmd):
     subprocess.call(cmd.split(), shell=False)
 
 
-def on_message(mosq, obj, msg):
+def poweroff():
     log("shuting down...")
     exec("poweroff")
+
+
+def reboot():
+    log("rebooting...")
+    exec("reboot")
 
 
 if __name__ == '__main__':
 
     log("init...")
+    initTime = datetime.now()
 
     client = paho.Client()
     client.on_message = on_message
@@ -41,7 +68,7 @@ if __name__ == '__main__':
 
     client.subscribe(topic, 0)
 
-    log("listening on " + topic)
+    log("listening...")
 
     while client.loop() == 0:
         time.sleep(0)

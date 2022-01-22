@@ -3,4 +3,11 @@
 xrandr --auto
 xrandr --output DP-5 --off
 xrandr --output DP-2 --off
-pacmd set-default-sink alsa_output.pci-0000_26_00.1.hdmi-stereo
+
+device=$(pacmd list-sinks | grep alsa_output.pci-0000_26_00.1.hdmi | awk '{print $2}')
+device=${device:1}
+device=${device::-1}
+pacmd set-default-sink $device
+
+killall steam
+nohup steam -bigpicture &

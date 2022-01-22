@@ -3,8 +3,10 @@ Description=Listens to manjaro/poweroff topic on pi's mosquito MQTT broker
 
 [Service]
 Type=simple
-ExecStart=start-poweroff-trigger-listener
+ExecStartPre=/bin/sleep 10
+ExecStart=start-power-management-listener
 Restart=always
+RestartSec=60
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=default.target

@@ -3,8 +3,10 @@ Description=Listens to manjaro/mode topic on pi's mosquito MQTT broker
 
 [Service]
 Type=simple
+ExecStartPre=/bin/sleep 10
 ExecStart=start-mode-switcher-listener
 Restart=always
+RestartSec=60
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=default.target
