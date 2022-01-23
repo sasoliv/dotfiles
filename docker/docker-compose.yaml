@@ -1,6 +1,15 @@
 version: "3.5"
 services:
 
+  nginx:
+    image: nginx-local
+    build:
+      context: ./nginx
+    container_name: nginx
+    ports:
+     - 80:80
+    restart: unless-stopped
+
   homer:
     image: homer-local
     build:
@@ -11,8 +20,6 @@ services:
       - GID=1000
     volumes:
       - homer-data:/www/assets
-    ports:
-      - 80:8080
     restart: unless-stopped
 
   portainer:
@@ -23,7 +30,6 @@ services:
       - /mnt/data/config/portainer/data:/data
     ports:
       - 8000:8000
-      - 9000:9000
     restart: unless-stopped
 
   prometheus:
@@ -34,18 +40,16 @@ services:
     user: 1000:1000
     volumes:
       - /mnt/data/config/prometheus:/prometheus
-    ports:
-      - 9090:9090
     restart: unless-stopped
 
   grafana:
-    image: grafana/grafana
+    image: grafana-local
+    build:
+      context: ./grafana
     container_name: grafana
     user: 1000:1000
     volumes:
       - /mnt/data/config/grafana:/var/lib/grafana
-    ports:
-      - 3000:3000
     restart: unless-stopped
 
   node-exporter:
@@ -84,7 +88,6 @@ services:
       - 53:53/tcp
       - 53:53/udp
       - 67:67/udp
-      - 81:80/tcp
     cap_add:
       - NET_ADMIN
     restart: unless-stopped
@@ -103,7 +106,6 @@ services:
     ports:
       - 6881:6881
       - 6881:6881/udp
-      - 8090:8090
     restart: unless-stopped
 
   jellyfin:
@@ -111,14 +113,13 @@ services:
     container_name: jellyfin
     hostname: pi-jellyfin
     environment:
-      - JELLYFIN_PublishedServerUrl=http://pi:8096
+      - JELLYFIN_PublishedServerUrl=http://pi/jellyfin
     user: 1000:1000    
     volumes:
       - /mnt/data/config/jellyfin_config:/config
       - /mnt/data/config/jellyfin_cache:/cache
       - /mnt/data/media:/media    
     ports:
-      - 8096:8096
       - 8920:8920
       - 1900:1900/udp
       - 7359:7359/udp
@@ -127,12 +128,12 @@ services:
   filebrowser:
     image: filebrowser/filebrowser
     container_name: filebrowser
+    environment:
+      - FB_BASEURL=/filebrowser
     user: 1000:1000
     volumes:
       - /mnt/data:/srv
       - /mnt/data/config/filebrowser.db:/database.db
-    ports:
-      - 8100:80
     restart: unless-stopped
 
   mosquitto:
