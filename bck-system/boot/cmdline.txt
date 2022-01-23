@@ -1,1 +1,1 @@
-console=serial0,115200 console=tty1 root=PARTUUID=9a7eea46-02 rootfstype=ext4 fsck.repair=yes rootwait cgroup_memory=1 cgroup_enable=memory
+console=serial0,115200 console=tty1 root=PARTUUID=5e7b43f6-02 rootfstype=ext4 fsck.repair=yes rootwait rootwait cgroup_memory=1 cgroup_enable=memory
