@@ -152,3 +152,7 @@ alias cdd='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; 
 alias ll='exa -la --group --group-directories-first'
 alias catt='bat'
 alias vim=nvim
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
