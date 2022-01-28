@@ -1,0 +1,1 @@
+openssl req -nodes -new -x509 -keyout pi-pkey.pem -out pi-cert.pem
