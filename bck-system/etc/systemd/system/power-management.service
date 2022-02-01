@@ -1,0 +1,13 @@
+[Unit]
+Description=Listens to pi/power topic on pi's mosquito MQTT broker
+
+[Service]
+Type=simple
+ExecStartPre=/bin/sleep 10
+ExecStart=start-power-management-listener
+Restart=always
+RestartSec=60
+
+[Install]
+WantedBy=multi-user.target
+

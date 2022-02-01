@@ -1,0 +1,82 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+##################################
+# install dependencies:          #
+#   - pip install paho-mqtt      #
+# if running as a service:       #
+#   - sudo pip install paho-mqqt #
+##################################
+
+import paho.mqtt.client as paho
+import subprocess
+import sys
+import time
+
+from datetime import datetime
+
+host = "pi"
+topic = "pi/power"
+
+modes = {
+    "poweroff": lambda _: poweroff(),
+    "reboot": lambda _: reboot(),
+}
+
+gracePreriodSeconds = 3
+initTime = None
+
+
+def nowStr():
+    return datetime.now().strftime("[%Y-%m-%d %H:%M:%S]")
+
+
+def log(*values):
+    print(nowStr(), *values)
+    sys.stdout.flush()
+
+
+def on_message(mosq, obj, msg):
+    if((datetime.now() - initTime).total_seconds() < gracePreriodSeconds):
+        log('Ignoring message, Still in grace period')
+        return
+
+    mode = msg.payload.decode("utf-8")
+    func = modes.get(mode)
+    if (func):
+        func(None)
+    else:
+        log("Mode not supported: " + mode)
+
+
+def exec(cmd):
+    subprocess.call(cmd.split(), shell=False)
+
+
+def poweroff():
+    log("shuting down...")
+    exec("poweroff")
+
+
+def reboot():
+    log("rebooting...")
+    exec("reboot")
+
+
+if __name__ == '__main__':
+
+    log("init...")
+    initTime = datetime.now()
+
+    client = paho.Client()
+    client.on_message = on_message
+
+    client.connect(host, 1883, 60)
+
+    client.subscribe(topic, 0)
+
+    log("listening...")
+
+    while client.loop() == 0:
+        time.sleep(0)
+
