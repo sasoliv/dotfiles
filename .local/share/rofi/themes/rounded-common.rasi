@@ -91,4 +91,8 @@ element-icon {
 
 element-text {
     text-color: inherit;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> b660526746d66b966550fe5326378e21560926a0
