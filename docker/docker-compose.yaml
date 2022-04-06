@@ -150,6 +150,14 @@ services:
         - 9001:9001
     restart: unless-stopped
 
+  shelly-mapper:
+    image: shelly-mapper-local
+    build:
+      context: ./shelly-mapper
+    container_name: shelly-mapper
+    restart: unless-stopped
+
+
 volumes:
   homer-data:
     driver: local
