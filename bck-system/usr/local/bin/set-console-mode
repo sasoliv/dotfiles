@@ -8,6 +8,7 @@ device=$(pacmd list-sinks | grep alsa_output.pci-0000_26_00.1.hdmi | awk '{print
 device=${device:1}
 device=${device::-1}
 pacmd set-default-sink $device
+pacmd set-sink-volume $device 100
 
 killall steam
 nohup steam -bigpicture &
