@@ -123,6 +123,7 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
+alias update-pi='sudo apt update && sudo apt upgrade && sudo apt autoremove && cd ~/docker && ./update.sh'
 
 neofetch
 
