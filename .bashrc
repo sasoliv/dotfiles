@@ -156,3 +156,14 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
+
+
+burn-iso() {
+	if [ "$#" -ne 2 ]; then
+    echo "usage: ${FUNCNAME[0]} <path-to-iso> <device>"
+    echo "example: ${FUNCNAME[0]} ~/my-iso.iso /dev/sdd"
+    echo "check devices: sudo fdisk -l"
+  else
+  	sudo dd if=$1 of=$2 bs=4M conv=fsync oflag=direct status=progress
+	fi
+}
