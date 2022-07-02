@@ -147,4 +147,8 @@ configuration {
 }
 //@theme "/usr/share/rofi/themes/Monokai.rasi"
 //@theme "/usr/share/rofi/themes/android_notification.rasi"
+//@theme "/home/saso/.local/share/rofi/themes/rounded-gray-dark.rasi"
+//@theme "/home/saso/.local/share/rofi/themes/spotlight-dark.rasi"
+//@theme "/home/saso/.local/share/rofi/themes/spotlight.rasi"
+//@theme "/home/saso/.local/share/rofi/themes/spotlight-dark.rasi"
 @theme "/home/saso/.local/share/rofi/themes/rounded-gray-dark.rasi"
