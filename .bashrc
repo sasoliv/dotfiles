@@ -79,13 +79,29 @@ if ${use_color} ; then
 		fi
 	fi
 
-	if [[ ${EUID} == 0 ]] ; then
-		PS1='\[\033[01;31m\][\h\[\033[01;36m\] \W\[\033[01;31m\]]\$\[\033[00m\] '
-	else
-		#PS1='\[\033[01;32m\][\u@\h\[\033[01;37m\] \W\[\033[01;32m\]]\$\[\033[00m\] '
-		#PS1="\[\033[01;32m\][\033[01;37m\]\w\[\033[01;32m\]]\[\033[01;33m\]\$(__git_ps1)\[\033[01;32m\]\$\[\033[00m\] "
-		PS1='\[\033[01;34m\]\w\[\033[01;33m\]$(__git_ps1 "(%s)")\[\033[01;34m\]\$ \[\033[00;00m\]'
-	fi
+__build-ps1() {
+    local fgBlack='\[\033[01;30m\]'
+    local fgYellow='\[\033[01;33m\]'
+    local fgBlue='\[\033[01;34m\]'
+
+    local bgBlack='\[\033[01;40m\]'
+    local bgYellow='\[\033[01;43m\]'
+    local bgBlue='\[\033[01;44m\]'
+
+    local colorReset='\[\033[0m\]'
+    local result=$(__git_ps1 "$bgYellow$fgBlue$fgBlack  %s$fgYellow")
+    if [ -z "$result" ]; then
+        result="$fgBlue"
+    fi
+    result="$result$bgBlack"
+    printf "$fgBlack$bgBlue \w$fgYellow$bgBlack$result$colorReset "
+}
+
+set_bash_prompt(){
+    PS1="$(__build-ps1)"
+}
+
+PROMPT_COMMAND=set_bash_prompt
 
 	alias ls='ls --color=auto'
 	alias grep='grep --colour=auto'
