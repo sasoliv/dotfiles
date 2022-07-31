@@ -57,14 +57,41 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
-if [ "$color_prompt" = yes ]; then
-    #PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w \$\[\033[00m\] '
-    GIT_PS1_SHOWDIRTYSTATE=1
-    GIT_PS1_SHOWCOLORHINTS=1
-    PS1='\[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[01;33m\]$(__git_ps1 "(%s)")\[\033[01;34m\]\$ \[\033[00m\]'
-else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-fi
+GIT_PS1_SHOWDIRTYSTATE=1
+GIT_PS1_SHOWCOLORHINTS=1
+
+__build-ps1() {
+    local fgBlack='\[\033[01;30m\]'
+    local fgGreen='\[\033[01;32m\]'
+    local fgYellow='\[\033[01;33m\]'
+    local fgBlue='\[\033[01;34m\]'
+
+    local bgBlack='\[\033[01;40m\]'
+    local bgGreen='\[\033[01;42m\]'
+    local bgYellow='\[\033[01;43m\]'
+    local bgBlue='\[\033[01;44m\]'
+
+    local colorReset='\[\033[0m\]'
+    local result=$(__git_ps1 "$bgYellow$fgBlue$fgBlack  %s$fgYellow")
+    if [ -z "$result" ]; then
+        result="$fgBlue"
+    fi
+    result="$result$bgBlack"
+    printf "$fgBlack$bgGreen \u@\h$fgGreen$bgBlue$fgBlack \w$fgYellow$bgBlack$result$colorReset "
+}
+
+set_bash_prompt(){
+    PS1="$(__build-ps1)"
+}
+
+PROMPT_COMMAND=set_bash_prompt
+
+#if [ "$color_prompt" = yes ]; then
+#    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w \$\[\033[00m\] '
+#    PS1='\[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[01;33m\]$(__git_ps1 "(%s)")\[\033[01;34m\]\$ \[\033[00m\]'
+#else
+#    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+#fi
 unset color_prompt force_color_prompt
 
 # If this is an xterm set the title to user@host:dir
