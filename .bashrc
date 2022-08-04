@@ -124,7 +124,7 @@ __build-ps1() {
         prev=$key
     done
     result="$result$colorReset${fg[$prev]}$splitter$colorReset "
-    printf "$result"
+    echo "$result"
 }
 
 set_bash_prompt(){
