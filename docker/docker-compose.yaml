@@ -61,19 +61,6 @@ services:
       - '/:/host:ro,rslave'
     restart: unless-stopped
 
-  cadvisor:
-    image: zcube/cadvisor
-    container_name: cadvisor
-    volumes:
-      - /:/rootfs:ro
-      - /var/run:/var/run:ro
-      - /sys:/sys:ro
-      - /var/lib/docker/:/var/lib/docker:ro
-      - /dev/disk/:/dev/disk:ro
-    devices:
-      - /dev/kmsg
-    restart: unless-stopped
-
   pihole:
     image: pihole/pihole
     container_name: pihole
