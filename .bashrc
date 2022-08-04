@@ -66,9 +66,9 @@ __build-ps1() {
     local fgYellow='\[\033[01;33m\]'
     local fgBlue='\[\033[01;34m\]'
 
-    local bgYellow="\[\033[01;43m\]"
-    local bgGreen="\[\033[01;42m\]"
-    local bgBlue="\[\033[01;44m\]"
+    local bgYellow='\[\033[01;43m\]'
+    local bgGreen='\[\033[01;42m\]'
+    local bgBlue='\[\033[01;44m\]'
 
     local colorReset='\[\033[0m\]'
 
@@ -109,7 +109,7 @@ __build-ps1() {
         prev=$key
     done
     result="$result$colorReset${fg[$prev]}$splitter$colorReset "
-    printf "$result"
+    echo "$result"
 }
 
 set_bash_prompt(){
