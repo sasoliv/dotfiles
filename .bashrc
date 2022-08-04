@@ -66,18 +66,50 @@ __build-ps1() {
     local fgYellow='\[\033[01;33m\]'
     local fgBlue='\[\033[01;34m\]'
 
-    local bgBlack='\[\033[01;40m\]'
-    local bgGreen='\[\033[01;42m\]'
-    local bgYellow='\[\033[01;43m\]'
-    local bgBlue='\[\033[01;44m\]'
+    local bgYellow="\[\033[01;43m\]"
+    local bgGreen="\[\033[01;42m\]"
+    local bgBlue="\[\033[01;44m\]"
 
     local colorReset='\[\033[0m\]'
-    local result=$(__git_ps1 "$bgYellow$fgBlue$fgBlack  %s$fgYellow")
-    if [ -z "$result" ]; then
-        result="$fgBlue"
-    fi
-    result="$result$bgBlack"
-    printf "$fgBlack$bgGreen \u@\h$fgGreen$bgBlue$fgBlack \w$fgYellow$bgBlack$result$colorReset "
+
+    declare -A values
+    declare -A prefixes
+    declare -A bg
+    declare -A fg
+
+    local order=("user-host" "path" "git" )
+
+    values['user-host']="\u@\h"
+    bg['user-host']=$bgGreen
+    fg['user-host']=$fgGreen
+
+    values['path']=" \w"
+    bg['path']=$bgBlue
+    fg['path']=$fgBlue
+
+    values['git']=$(__git_ps1 "%s")
+    prefixes['git']='  '
+    bg['git']=$bgYellow
+    fg['git']=$fgYellow
+
+    local splitter=''
+    local result=''
+    local prev=''
+    for key in "${order[@]}"; do
+        if [ -z "${values[$key]}" ]; then            
+            continue
+        fi
+        
+        if [ -z "$prev" ]; then
+            result="${fgBlack}${bg[$key]} ${prefixes[$key]}${values[$key]}"
+        else
+            result="$result${fg[$prev]}${bg[$key]}$splitter"
+            result="$result${fgBlack}${bg[$key]}${prefixes[$key]}${values[$key]}"
+        fi
+        prev=$key
+    done
+    result="$result$colorReset${fg[$prev]}$splitter$colorReset "
+    printf "$result"
 }
 
 set_bash_prompt(){
