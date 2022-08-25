@@ -202,6 +202,10 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
+alias ......='cd ../../../../..'
+alias .......='cd ../../../../../..'
+alias ........='cd ../../../../../../..'
+alias sb=subl
 
 
 burn-iso() {
@@ -215,3 +219,11 @@ burn-iso() {
 }
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+sbf() {
+    local files=$(fzf -m --preview 'bat --style=numbers --color=always --line-range :500 {}')
+    if [ ! -z "$files" ]
+    then
+        subl $files
+    fi
+}

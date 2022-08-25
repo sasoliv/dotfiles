@@ -17,8 +17,7 @@ return require('packer').startup({
         })
         
         use({ 
-            'feline-nvim/feline.nvim',
-            branch = '0.5-compat',
+            'feline-nvim/feline.nvim'
             requires = 'kyazdani42/nvim-web-devicons',
             config = function()
                 require('feline').setup()
