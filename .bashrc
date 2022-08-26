@@ -219,6 +219,7 @@ burn-iso() {
 }
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+export FZF_DEFAULT_OPTS='--color=hl:#00ff00,hl+:#00ff00 --height 50% --border'
 
 sbf() {
     local files=$(fzf -m --preview 'bat --style=numbers --color=always --line-range :500 {}')
