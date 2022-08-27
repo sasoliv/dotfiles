@@ -13,7 +13,7 @@
 	[
 		"Vintage",
 	],
-	"theme": "Cyanide - Sky.sublime-theme",
+	"theme": "ayu-dark.sublime-theme",
 	"color_scheme": "Packages/Darkula Color Scheme/darkula.tmTheme",
 	"font_size": 9,
 	"caret_style": "smooth",
