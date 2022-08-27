@@ -62,7 +62,7 @@ __build-ps1() {
     fg['path']=$fgBlue
 
     values['git']=$(__git_ps1 "%s")
-    prefixes['git']='  '
+    prefixes['git']='  '
     bg['git']=$bgYellow
     fg['git']=$fgYellow
 
