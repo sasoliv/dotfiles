@@ -1,6 +1,5 @@
 configuration {
   modi: "run,drun";
-	font: "roboto 12";
 /*	location: 0;*/
 /*	yoffset: 0;*/
 /*	xoffset: 0;*/
@@ -145,10 +144,4 @@ configuration {
       sorting-method:    "name";
   }
 }
-//@theme "/usr/share/rofi/themes/Monokai.rasi"
-//@theme "/usr/share/rofi/themes/android_notification.rasi"
-//@theme "/home/saso/.local/share/rofi/themes/rounded-gray-dark.rasi"
-//@theme "/home/saso/.local/share/rofi/themes/spotlight-dark.rasi"
-//@theme "/home/saso/.local/share/rofi/themes/spotlight.rasi"
-//@theme "/home/saso/.local/share/rofi/themes/spotlight-dark.rasi"
-@theme "/home/saso/.local/share/rofi/themes/rounded-gray-dark.rasi"
+@theme "/home/saso/.local/share/rofi/themes/type-4/style-4.rasi"
