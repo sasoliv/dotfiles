@@ -6,6 +6,10 @@
 [[ $- != *i* ]] && return
 
 ################################################################################
+# variables ->
+export EDITOR=subl
+# <- variables
+################################################################################
 # alias & functions -->
 alias ls='ls --color=auto'
 alias grep='grep --colour=auto'
@@ -33,6 +37,15 @@ burn-iso() {
         sudo dd if=$1 of=$2 bs=4M conv=fsync oflag=direct status=progress
     fi
 }
+
+sbf() {
+    local files=$(fzf -m --preview 'bat --style=numbers --color=always --line-range :500 {}')
+    if [ ! -z "$files" ]
+    then
+        subl $files
+    fi
+}
+
 # <-- alias & functions
 ################################################################################
 # PS1 -->
@@ -93,19 +106,12 @@ set_bash_prompt(){
 PROMPT_COMMAND=set_bash_prompt
 # <-- ps1
 ################################################################################
-# fzf -->
-export FZF_DEFAULT_OPTS='--color=hl:#00ff00,hl+:#00ff00 --height 50% --border'
-sbf() {
-    local files=$(fzf -m --preview 'bat --style=numbers --color=always --line-range :500 {}')
-    if [ ! -z "$files" ]
-    then
-        subl $files
-    fi
-}
-# <-- fzf
-################################################################################
 # sources -->
+
 source ~/sources/git/contrib/completion/git-completion.bash
+
+export FZF_DEFAULT_OPTS='--color=hl:#00ff00,hl+:#00ff00 --height 50% --border'
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
 # <-- sources
 ################################################################################
