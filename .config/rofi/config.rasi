@@ -1,9 +1,0 @@
-configuration {
-  modi: "run,drun";
-	show-icons: true;
-  timeout {
-      action: "kb-cancel";
-      delay:  0;
-  }
-}
-@theme "/home/saso/.local/share/rofi/themes/style-4.rasi"
