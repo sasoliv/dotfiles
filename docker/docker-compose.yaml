@@ -67,7 +67,6 @@ services:
     hostname: pihole.pi
     environment:
       TZ: Europe/Lisbon
-      WEBPASSWORD: changeme
     volumes:
       - /mnt/data/config/pihole/etc-pihole/:/etc/pihole/
       - /mnt/data/config/pihole/etc-dnsmasq.d/:/etc/dnsmasq.d/
