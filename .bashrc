@@ -111,7 +111,7 @@ PROMPT_COMMAND=set_bash_prompt
 
 source ~/sources/git/contrib/completion/git-completion.bash
 
-export FZF_DEFAULT_COMMAND='find .'
+export FZF_DEFAULT_COMMAND='find *'
 export FZF_DEFAULT_OPTS='--color=hl:#00ff00,hl+:#00ff00 --height 50% --border'
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
