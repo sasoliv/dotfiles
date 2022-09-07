@@ -4,14 +4,14 @@ org=saso
 domain=pi
 
 openssl genpkey -algorithm RSA -out "$org".key
-openssl req -x509 -key "$org".key -out "$org".crt \
+openssl req -x509 -key "$org".key -days 3650 -out "$org".crt \
     -subj "/CN=$org/O=$org"
 
 openssl genpkey -algorithm RSA -out "$domain".key
 openssl req -new -key "$domain".key -out "$domain".csr \
     -subj "/CN=$domain/O=$org"
 
-openssl x509 -req -in "$domain".csr -days 365 -out "$domain".crt \
+openssl x509 -req -in "$domain".csr -days 3650 -out "$domain".crt \
     -CA "$org".crt -CAkey "$org".key -CAcreateserial \
     -extfile <(cat <<END
 basicConstraints = CA:FALSE

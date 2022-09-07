@@ -10,7 +10,7 @@ services:
      - 80:80
      - 443:443
     volumes:
-     - /mnt/data/config/nginx/ssl:/etc/ssl/certs
+     - /mnt/data/config/nginx/ssl/certs:/etc/ssl/certs
     restart: unless-stopped
 
   homer:
