@@ -1,12 +1,15 @@
 title: "dashboard"
 subtitle: "pi"
 
-icon: "fab fa-raspberry-pi" # Optional icon
+icon: "fab fa-raspberry-pi"
 
 header: true
 footer: 'pi dashboard'
 
-theme: dark
+defaults:
+  layout: columns
+  colorTheme: dark
+
 colors:
   light:
     highlight-primary: "#3367d6"
@@ -42,17 +45,17 @@ services:
       - name: "qBittorrent"
         logo: "assets/tools/qbittorrent.png"
         tag: "app"
-        url: "http://pi/qbittorrent"
+        url: "qbittorrent"
         target: "_blank"
       - name: "Jellyfin"
         logo: "assets/tools/jellyfin.png"
         tag: "app"
-        url: "http://pi/jellyfin"
+        url: "jellyfin"
         target: "_bank"
       - name: "File Browser"
         logo: "assets/tools/filebrowser.png"
         tag: "app"
-        url: "http://pi/filebrowser"
+        url: "filebrowser"
         target: "_bank"
 
   - name: "Admin"
@@ -61,15 +64,15 @@ services:
       - name: "Portainer"
         logo: "assets/tools/portainer.png"
         tag: "admin"
-        url: "http://pi/portainer"
+        url: "portainer"
         target: "_blank"
       - name: "Grafana"
         logo: "assets/tools/grafana.png"
         tag: "admin"
-        url: "http://pi/grafana"
+        url: "grafana"
         target: "_bank"
       - name: "Pi-hole"
         logo: "assets/tools/pihole.png"
         tag: "admin"
-        url: "http://pi/pihole/admin"
+        url: "pihole/admin"
         target: "_bank"
