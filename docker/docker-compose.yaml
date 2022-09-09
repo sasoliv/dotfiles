@@ -146,6 +146,16 @@ services:
     container_name: shelly-mapper
     restart: unless-stopped
 
+  ddclient:
+    image: linuxserver/ddclient:latest
+    container_name: ddclient
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+    volumes:
+      - /mnt/data/config/ddclient:/config
+    restart: unless-stopped
 
 volumes:
   homer-data:
