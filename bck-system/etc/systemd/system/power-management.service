@@ -1,5 +1,5 @@
 [Unit]
-Description=Listens to manjaro/poweroff topic on pi's mosquito MQTT broker
+Description=Runs start-power-management-listener script
 
 [Service]
 Type=simple

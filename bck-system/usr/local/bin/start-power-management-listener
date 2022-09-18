@@ -9,7 +9,7 @@ import time
 from datetime import datetime
 
 host = "pi"
-topic = "manjaro/power"
+topic = "desktop/power"
 
 modes = {
     "poweroff": lambda _: poweroff(),

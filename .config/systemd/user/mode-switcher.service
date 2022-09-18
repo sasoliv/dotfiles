@@ -1,5 +1,5 @@
 [Unit]
-Description=Listens to manjaro/mode topic on pi's mosquito MQTT broker
+Description=Runs start-mode-switcher-listener script
 
 [Service]
 Type=simple
