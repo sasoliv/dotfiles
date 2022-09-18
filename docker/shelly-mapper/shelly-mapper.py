@@ -10,10 +10,10 @@ host = "mosquitto"
 source = "shellies/shellybutton1/input_event/0"
 
 mappings = {
-    "S": {"topic": "manjaro/mode", "payload": "console"},
-    "SS": {"topic": "manjaro/mode", "payload": "all"},
-    "SSS": {"topic": "manjaro/power", "payload": "reboot"},
-    "L": {"topic": "manjaro/power", "payload": "poweroff"}
+    "S": {"topic": "desktop/mode", "payload": "console"},
+    "SS": {"topic": "desktop/mode", "payload": "all"},
+    "SSS": {"topic": "desktop/power", "payload": "reboot"},
+    "L": {"topic": "desktop/power", "payload": "poweroff"}
 }
 
 client = None
