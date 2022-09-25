@@ -170,7 +170,7 @@ services:
       - "445:445/tcp"
     volumes:
       - /mnt/data:/mnt/data:z
-    command: '-s "data;/mnt/data;yes;no;yes"'
+    command: '-s "data;/mnt/data;yes;no;yes" -u "pi;pi"'
     restart: unless-stopped
 
 volumes:
