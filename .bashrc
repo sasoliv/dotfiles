@@ -187,5 +187,5 @@ alias update-pi='sudo apt update && sudo apt upgrade && sudo apt autoremove && c
 neofetch
 
 export FZF_DEFAULT_COMMAND='find *'
-export FZF_DEFAULT_OPTS='--color=hl:#00ff00,hl+:#00ff00 --height 50% --border'
+export FZF_DEFAULT_OPTS='-i --color=hl:#00ff00,hl+:#00ff00 --height 50% --border'
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
