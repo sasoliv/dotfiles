@@ -3,7 +3,7 @@
 killall steam
 
 xrandr --auto
-xrandr --output DP-2 --primary --mode 1920x1080 -r 143.85 --left-of HDMI-0
+xrandr --output DP-2 --primary --mode 1920x1080 -r 143.85
 xrandr --output DP-5 --left-of DP-2
 xrandr --output HDMI-0 --right-of DP-2
 
