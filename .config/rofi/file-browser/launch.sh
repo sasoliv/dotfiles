@@ -7,4 +7,4 @@ then
 fi
 CONFIG="$CONFIG/rofi/file-browser"
 
-rofi -show fb -modes "fb:$CONFIG/file-browser.sh"
+rofi -show fb -modes "fb:$CONFIG/file-browser.sh" -theme "$CONFIG/theme.rasi"

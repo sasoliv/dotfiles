@@ -52,8 +52,7 @@ browse() {
 
 handleFile() {
     FILE=$1
-    FILE_ESCAPED=$(echo "$FILE" | sed 's/\//\\\//g')
-    echo -en "\0prompt\x1f\n"
+    FILE_ESCAPED=$(echo "$FILE" | sed 's/\//\\\//g')    
     echo -en "\0message\x1f${FILE}\n"
 
     echo -en " open\0info\x1f${ACTION_OPEN};${FILE}\n"
@@ -75,29 +74,19 @@ cancel() {
     CUR_DIR="${PREV_PATH%/*}/"
 }
 
+echo -en "\0prompt\x1f\n"
 echo -en "\0keep-selection\x1ffalse\n"
 
 case "$ACTION" in
-  "$ACTION_OPEN")
-    open
-    ;;
-  "$ACTION_EDIT")
-    edit
-    ;;
-  "$ACTION_CANCEL")
-    cancel
-    ;;
-   "$ACTION_BROWSE")
-    browse
-    ;;
-  *)
-    init
-    ;;
+  "$ACTION_OPEN") open ;;
+  "$ACTION_EDIT") edit ;;
+  "$ACTION_CANCEL") cancel ;;
+  "$ACTION_BROWSE") browse ;;
+  *) init ;;
 esac
 
 CUR_DIR_ESCAPED=$(echo "$CUR_DIR" | sed 's/\//\\\//g')
 
-echo -en "\0prompt\x1f\n"
 echo -en "\0message\x1f${CUR_DIR}\n"
 
 ENTRIES=$(ls --group-directories-first --color=never --indicator-style=slash -a $CUR_DIR | grep --color=never -v -e '^\./$' | sed -e "s/\$/\\\\0info\\\\x1f${ACTION_BROWSE};${CUR_DIR_ESCAPED}/")
