@@ -27,7 +27,7 @@ listFiles() {
         echo -en "\0info\x1f${ACTION_UP};${CUR_DIR}\n"
     fi
 
-    ENTRIES=$(ls --group-directories-first --color=never --indicator-style=slash --almost-all $CUR_DIR | grep --color=never -v -e '^\./$' | sed -e "s/\$/\\\\0info\\\\x1f${ACTION_BROWSE};${CUR_DIR_ESCAPED}/")
+    ENTRIES=$(ls --group-directories-first --color=never --indicator-style=slash --almost-all $CUR_DIR | sed -e "s/\$/\\\\0info\\\\x1f${ACTION_BROWSE};${CUR_DIR_ESCAPED}/")
     echo -en "$ENTRIES"
 }
 
@@ -119,14 +119,14 @@ PREV_PATH=$(echo $ROFI_INFO | cut -d ';' -f2)
 echo -en "\0prompt\x1f\n"
 echo -en "\0keep-selection\x1ffalse\n"
 
-case "$ACTION" in
-    "$ACTION_BACK") back ;;
-    "$ACTION_OPEN") open ;;
-    "$ACTION_EDIT") edit ;;
-    "$ACTION_DELETE") delete ;;
-    "$ACTION_DELETE_CANCEL") deleteCancel ;;
-    "$ACTION_DELETE_CONFIRM") deleteConfirm ;;
-    "$ACTION_BROWSE") browse ;;
-    "$ACTION_UP") up ;;
+case $ACTION in
+    $ACTION_BACK) back ;;
+    $ACTION_OPEN) open ;;
+    $ACTION_EDIT) edit ;;
+    $ACTION_DELETE) delete ;;
+    $ACTION_DELETE_CANCEL) deleteCancel ;;
+    $ACTION_DELETE_CONFIRM) deleteConfirm ;;
+    $ACTION_BROWSE) browse ;;
+    $ACTION_UP) up ;;
     *) init ;;
 esac
