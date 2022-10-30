@@ -13,32 +13,47 @@ ACTION_DELETE="DELETE"
 ACTION_DELETE_CONFIRM="DELETE_CONFIRM"
 ACTION_DELETE_CANCEL="DELETE_CANCEL"
 
+ICON_UP=""
+ICON_BACK=""
+ICON_OPEN=""
+ICON_EDIT=""
+ICON_DELETE=""
+ICON_CANCEL=""
+ICON_OK=""
+
 ################################################################################
 # functions
 ################################################################################
 
-listFiles() {
-    CUR_DIR_ESCAPED=$(echo "$CUR_DIR" | sed 's/\//\\\//g')
+buildEntry(){
+    currentPath=$1
+    while read -r path; do
+        icon="  "
+        label=$path
+        if [[ $path == */ ]]; then
+            icon="+ "
+            label=${label%/*}
+        fi
+        echo "$icon$label\0info\x1f${ACTION_BROWSE};$path;$currentPath"
+    done
+}
 
+listFiles() {
     echo -en "\0message\x1f${CUR_DIR}\n"
 
-    if [ "$CUR_DIR" != "/" ]
-    then
-        echo -en "\0info\x1f${ACTION_UP};${CUR_DIR}\n"
+    if [ "$CUR_DIR" != "/" ]; then
+        echo -en "$ICON_UP\0info\x1f${ACTION_UP};${ACTION_UP};${CUR_DIR}\n"
     fi
 
-    ENTRIES=$(ls --group-directories-first --color=never --indicator-style=slash --almost-all $CUR_DIR | sed -e "s/\$/\\\\0info\\\\x1f${ACTION_BROWSE};${CUR_DIR_ESCAPED}/")
-    echo -en "$ENTRIES"
+    echo -en "$(ls --group-directories-first --color=never --indicator-style=slash --almost-all $CUR_DIR | buildEntry $CUR_DIR)"
 }
 
 init() {
-    if [ $REMEMBER_PATH = true ] && [ -f "$PREV_PATH_FILE" ] 
-    then
+    if [ $REMEMBER_PATH = true ] && [ -f "$PREV_PATH_FILE" ]; then
         CUR_DIR=$(cat $PREV_PATH_FILE)
     fi
 
-    if [ -z "$CUR_DIR" ] || [ ! -d "$CUR_DIR" ] || [ -L "$CUR_DIR" ]
-    then
+    if [ -z "$CUR_DIR" ] || [ ! -d "$CUR_DIR" ] || [ -L "$CUR_DIR" ]; then
         CUR_DIR="$HOME/"
     fi
 
@@ -46,8 +61,7 @@ init() {
 }
 
 browse() {
-    if [[ $SELECTION == */ ]]    
-    then
+    if [[ $SELECTION == */ ]]; then
         CUR_DIR="$PREV_PATH$SELECTION"
         echo "$CUR_DIR" > $PREV_PATH_FILE
         listFiles
@@ -68,10 +82,10 @@ handleFile() {
     FILE="$1"
     echo -en "\0message\x1f${FILE}\n"
 
-    echo -en " back\0info\x1f${ACTION_BACK};${FILE}\n"
-    echo -en " open\0info\x1f${ACTION_OPEN};${FILE}\n"
-    echo -en " edit\0info\x1f${ACTION_EDIT};${FILE}\n"
-    echo -en " delete\0info\x1f${ACTION_DELETE};${FILE}\n"
+    echo -en "$ICON_BACK back\0info\x1f${ACTION_BACK};${ACTION_BACK};${FILE}\n"
+    echo -en "$ICON_OPEN open\0info\x1f${ACTION_OPEN};${ACTION_OPEN};${FILE}\n"
+    echo -en "$ICON_EDIT edit\0info\x1f${ACTION_EDIT};${ACTION_EDIT};${FILE}\n"
+    echo -en "$ICON_DELETE delete\0info\x1f${ACTION_DELETE};${ACTION_DELETE};${FILE}\n"
 }
 
 back() {
@@ -88,9 +102,9 @@ edit() {
 }
 
 delete() {
-    echo -en "\0message\x1f ${PREV_PATH}\n"
-    echo -en " cancel\0info\x1f${ACTION_DELETE_CANCEL};${PREV_PATH}\n"
-    echo -en " ok\0info\x1f${ACTION_DELETE_CONFIRM};${PREV_PATH}\n"
+    echo -en "\0message\x1f$ICON_DELETE ${PREV_PATH}\n"
+    echo -en "$ICON_CANCEL cancel\0info\x1f${ACTION_DELETE_CANCEL};${ACTION_DELETE_CANCEL};${PREV_PATH}\n"
+    echo -en "$ICON_OK ok\0info\x1f${ACTION_DELETE_CONFIRM};${ACTION_DELETE_CONFIRM};${PREV_PATH}\n"
 }
 
 deleteCancel() {
@@ -106,15 +120,14 @@ deleteConfirm() {
 ################################################################################
 
 PREV_PATH_FILE=$XDG_CONFIG_HOME
-if [ -z "$PREV_PATH_FILE" ]
-then
+if [ -z "$PREV_PATH_FILE" ]; then
     PREV_PATH_FILE="$HOME/.config"
 fi
 PREV_PATH_FILE="$PREV_PATH_FILE/rofi/file-browser/prev_path"
 
-SELECTION="$@"
 ACTION=$(echo $ROFI_INFO | cut -d ';' -f1)
-PREV_PATH=$(echo $ROFI_INFO | cut -d ';' -f2)
+SELECTION=$(echo $ROFI_INFO | cut -d ';' -f2)
+PREV_PATH=$(echo $ROFI_INFO | cut -d ';' -f3)
 
 echo -en "\0prompt\x1f\n"
 echo -en "\0keep-selection\x1ffalse\n"
