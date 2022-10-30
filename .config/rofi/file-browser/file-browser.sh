@@ -5,9 +5,10 @@ EDIT_COMMAND="subl"
 REMEMBER_PATH=true
 
 ACTION_BROWSE="BROWSE"
+ACTION_UP="UP"
+ACTION_BACK="BACK"
 ACTION_OPEN="OPEN"
 ACTION_EDIT="EDIT"
-ACTION_CANCEL="CANCEL"
 
 PREV_PATH_FILE=$XDG_CONFIG_HOME
 if [ -z "$PREV_PATH_FILE" ]
@@ -33,13 +34,7 @@ init() {
 }
 
 browse() {
-    if [ "$SELECTION" == "../" ]
-    then
-        CUR_DIR=${PREV_PATH%/*}
-        CUR_DIR="${CUR_DIR%/*}/"
-        echo "$CUR_DIR" > $PREV_PATH_FILE
-
-    elif [[ $SELECTION == */ ]]    
+    if [[ $SELECTION == */ ]]    
     then
         CUR_DIR="$PREV_PATH$SELECTION"
         echo "$CUR_DIR" > $PREV_PATH_FILE
@@ -50,14 +45,24 @@ browse() {
     fi
 }
 
+up() {
+    CUR_DIR=${PREV_PATH%/*}
+    CUR_DIR="${CUR_DIR%/*}/"
+    echo "$CUR_DIR" > $PREV_PATH_FILE
+}
+
 handleFile() {
     FILE=$1
     FILE_ESCAPED=$(echo "$FILE" | sed 's/\//\\\//g')    
     echo -en "\0message\x1f${FILE}\n"
 
+    echo -en " back\0info\x1f${ACTION_BACK};${FILE}\n"
     echo -en " open\0info\x1f${ACTION_OPEN};${FILE}\n"
     echo -en " edit\0info\x1f${ACTION_EDIT};${FILE}\n"
-    echo -en " cancel\0info\x1f${ACTION_CANCEL};${FILE}\n"
+}
+
+back() {
+    CUR_DIR="${PREV_PATH%/*}/"
 }
 
 open() {
@@ -70,25 +75,26 @@ edit() {
     exit 0
 }
 
-cancel() {
-    CUR_DIR="${PREV_PATH%/*}/"
-}
-
 echo -en "\0prompt\x1f\n"
 echo -en "\0keep-selection\x1ffalse\n"
 
 case "$ACTION" in
-  "$ACTION_OPEN") open ;;
-  "$ACTION_EDIT") edit ;;
-  "$ACTION_CANCEL") cancel ;;
-  "$ACTION_BROWSE") browse ;;
-  *) init ;;
+    "$ACTION_BACK") back ;;
+    "$ACTION_OPEN") open ;;
+    "$ACTION_EDIT") edit ;;
+    "$ACTION_BROWSE") browse ;;
+    "$ACTION_UP") up ;;
+    *) init ;;
 esac
 
 CUR_DIR_ESCAPED=$(echo "$CUR_DIR" | sed 's/\//\\\//g')
 
 echo -en "\0message\x1f${CUR_DIR}\n"
 
-ENTRIES=$(ls --group-directories-first --color=never --indicator-style=slash -a $CUR_DIR | grep --color=never -v -e '^\./$' | sed -e "s/\$/\\\\0info\\\\x1f${ACTION_BROWSE};${CUR_DIR_ESCAPED}/")
+if [ "$CUR_DIR" != "/" ]
+then
+    echo -en "\0info\x1f${ACTION_UP};${CUR_DIR}\n"
+fi
 
+ENTRIES=$(ls --group-directories-first --color=never --indicator-style=slash --almost-all $CUR_DIR | grep --color=never -v -e '^\./$' | sed -e "s/\$/\\\\0info\\\\x1f${ACTION_BROWSE};${CUR_DIR_ESCAPED}/")
 echo -en "$ENTRIES"
