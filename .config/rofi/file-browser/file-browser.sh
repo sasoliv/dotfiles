@@ -13,16 +13,9 @@ ACTION_DELETE="DELETE"
 ACTION_DELETE_CONFIRM="DELETE_CONFIRM"
 ACTION_DELETE_CANCEL="DELETE_CANCEL"
 
-PREV_PATH_FILE=$XDG_CONFIG_HOME
-if [ -z "$PREV_PATH_FILE" ]
-then
-    PREV_PATH_FILE="$HOME/.config"
-fi
-PREV_PATH_FILE="$PREV_PATH_FILE/rofi/file-browser/prev_path"
-
-SELECTION="$@"
-ACTION=$(echo $ROFI_INFO | cut -d ';' -f1)
-PREV_PATH=$(echo $ROFI_INFO | cut -d ';' -f2)
+################################################################################
+# functions
+################################################################################
 
 listFiles() {
     CUR_DIR_ESCAPED=$(echo "$CUR_DIR" | sed 's/\//\\\//g')
@@ -107,6 +100,21 @@ deleteCancel() {
 deleteConfirm() {
     rm "${PREV_PATH}"
 }
+
+################################################################################
+# main
+################################################################################
+
+PREV_PATH_FILE=$XDG_CONFIG_HOME
+if [ -z "$PREV_PATH_FILE" ]
+then
+    PREV_PATH_FILE="$HOME/.config"
+fi
+PREV_PATH_FILE="$PREV_PATH_FILE/rofi/file-browser/prev_path"
+
+SELECTION="$@"
+ACTION=$(echo $ROFI_INFO | cut -d ';' -f1)
+PREV_PATH=$(echo $ROFI_INFO | cut -d ';' -f2)
 
 echo -en "\0prompt\x1f\n"
 echo -en "\0keep-selection\x1ffalse\n"
