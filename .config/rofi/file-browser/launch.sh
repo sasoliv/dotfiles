@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 CONFIG=$XDG_CONFIG_HOME
 if [ -z "$CONFIG" ]
@@ -7,4 +7,4 @@ then
 fi
 CONFIG="$CONFIG/rofi/file-browser"
 
-rofi -show fb -modes "fb:$CONFIG/file-browser.sh" -theme "$CONFIG/theme.rasi"
+rofi -show fb -modi "fb:$CONFIG/file-browser.sh" -theme "$CONFIG/theme.rasi"
