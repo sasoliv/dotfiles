@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 CONFIG=$XDG_CONFIG_HOME
 if [ -z "$CONFIG" ]

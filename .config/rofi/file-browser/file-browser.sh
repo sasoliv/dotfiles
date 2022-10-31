@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 OPEN_COMMAND="xdg-open"
 EDIT_COMMAND="subl"
