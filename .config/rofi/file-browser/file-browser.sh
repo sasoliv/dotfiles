@@ -20,6 +20,8 @@ ICON_EDIT=""
 ICON_DELETE=""
 ICON_CANCEL=""
 ICON_OK=""
+ICON_FOLDER=""
+ICON_FILE=" "
 
 ################################################################################
 # functions
@@ -28,10 +30,10 @@ ICON_OK=""
 buildEntry(){
     currentPath=$1
     while read -r path; do
-        icon="  "
+        icon="$ICON_FILE "
         label=$path
         if [[ $path == */ ]]; then
-            icon="+ "
+            icon="$ICON_FOLDER "
             label=${label%/*}
         fi
         echo "$icon$label\0info\x1f${ACTION_BROWSE};$path;$currentPath"
