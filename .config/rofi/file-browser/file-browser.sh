@@ -3,6 +3,7 @@
 OPEN_COMMAND="xdg-open"
 EDIT_COMMAND="subl"
 REMEMBER_PATH=true
+PREV_PATH_FILE_NAME="prev_path"
 
 ACTION_BROWSE="BROWSE"
 ACTION_UP="UP"
@@ -13,6 +14,7 @@ ACTION_DELETE="DELETE"
 ACTION_DELETE_CONFIRM="DELETE_CONFIRM"
 ACTION_DELETE_CANCEL="DELETE_CANCEL"
 
+ICON_PROMPT=""
 ICON_UP=""
 ICON_BACK=""
 ICON_OPEN=""
@@ -55,7 +57,7 @@ init() {
         CUR_DIR=$(cat $PREV_PATH_FILE)
     fi
 
-    if [ -z "$CUR_DIR" ] || [ ! -d "$CUR_DIR" ] || [ -L "$CUR_DIR" ]; then
+    if [ -z "$CUR_DIR" ] || [ ! -d "$CUR_DIR" ]; then
         CUR_DIR="$HOME/"
     fi
 
@@ -125,13 +127,13 @@ PREV_PATH_FILE=$XDG_CONFIG_HOME
 if [ -z "$PREV_PATH_FILE" ]; then
     PREV_PATH_FILE="$HOME/.config"
 fi
-PREV_PATH_FILE="$PREV_PATH_FILE/rofi/file-browser/prev_path"
+PREV_PATH_FILE="$PREV_PATH_FILE/rofi/file-browser/$PREV_PATH_FILE_NAME"
 
 ACTION=$(echo $ROFI_INFO | cut -d ';' -f1)
 SELECTION=$(echo $ROFI_INFO | cut -d ';' -f2)
 PREV_PATH=$(echo $ROFI_INFO | cut -d ';' -f3)
 
-echo -en "\0prompt\x1f\n"
+echo -en "\0prompt\x1f$ICON_PROMPT\n"
 echo -en "\0keep-selection\x1ffalse\n"
 
 case $ACTION in

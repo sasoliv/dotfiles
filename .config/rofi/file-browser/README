@@ -1,4 +1,5 @@
 Requirements:
-    rofi            - https://github.com/davatorium/rofi
-    font awesom     - https://fontawesome.com/
-    JetBranins mono - https://www.jetbrains.com/lp/mono/
+    rofi                                    - https://github.com/davatorium/rofi
+    font awesom                             - https://fontawesome.com/
+    JetBranins mono                         - https://www.jetbrains.com/lp/mono/
+    CopyQ (for the clipboard feature only)  - https://github.com/hluk/CopyQ
