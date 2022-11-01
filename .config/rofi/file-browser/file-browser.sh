@@ -116,6 +116,7 @@ deleteCancel() {
 
 deleteConfirm() {
     rm "${PREV_PATH}"
+    back
 }
 
 normalizeName() {
