@@ -30,7 +30,7 @@ main(){
 handleFile() {
     path="$1"
     
-    folder="${path%/*}/"
+    folder="${path%/*}"
     file=$(basename $path)
 
     echo "$folder" > $PREV_PATH_FILE
@@ -41,7 +41,17 @@ handleFile() {
 
 handleFolder() {
     path="$1"
+
+    while [[ $path == */ ]]
+    do
+       path="${path%/*}"
+    done
+
+    parent="${path%/*}"
+    folder=$(basename $path)
+
     echo "$path" > $PREV_PATH_FILE
+    export ROFI_INFO="BROWSE;$folder;$parent"
     $CONFIG/launch.sh
 }
 

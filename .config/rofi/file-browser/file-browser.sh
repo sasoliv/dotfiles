@@ -31,53 +31,52 @@ ICON_FILE=" "
 
 buildEntry(){
     currentPath=$1
-    while read -r path; do
+    while read -r name; do
         icon="$ICON_FILE "
-        label=$path
-        if [[ $path == */ ]]; then
+        if [ -d "$currentPath/$name" ]; then
             icon="$ICON_FOLDER "
-            label=${label%/*}
         fi
-        echo "$icon$label\0info\x1f${ACTION_BROWSE};$path;$currentPath"
+        echo "$icon$name\0info\x1f${ACTION_BROWSE};$name;$currentPath"
     done
 }
 
 listFiles() {
-    echo -en "\0message\x1f${CUR_DIR}\n"
-
-    if [ "$CUR_DIR" != "/" ]; then
+    echo -en "\0message\x1f${CUR_DIR}/\n"
+    listLoc="/"
+    if [ ! -z "$CUR_DIR" ]; then
         echo -en "$ICON_UP\0info\x1f${ACTION_UP};${ACTION_UP};${CUR_DIR}\n"
+        listLoc=$CUR_DIR
     fi
 
-    echo -en "$(ls --group-directories-first --color=never --indicator-style=slash --almost-all $CUR_DIR | buildEntry $CUR_DIR)"
+    echo -en "$(ls --group-directories-first --color=never --almost-all $listLoc | buildEntry $CUR_DIR)"
 }
 
 init() {
     if [ $REMEMBER_PATH = true ] && [ -f "$PREV_PATH_FILE" ]; then
         CUR_DIR=$(cat $PREV_PATH_FILE)
+        CUR_DIR=$(normalizeName $CUR_DIR)
     fi
 
     if [ -z "$CUR_DIR" ] || [ ! -d "$CUR_DIR" ]; then
-        CUR_DIR="$HOME/"
+        CUR_DIR="$HOME"
     fi
 
     listFiles
 }
 
 browse() {
-    if [[ $SELECTION == */ ]]; then
-        CUR_DIR="$PREV_PATH$SELECTION"
+    if [ -d "$PREV_PATH/$SELECTION" ]; then
+        CUR_DIR="$PREV_PATH/$SELECTION"
         echo "$CUR_DIR" > $PREV_PATH_FILE
         listFiles
 
     else
-        handleFile "$PREV_PATH$SELECTION"        
+        handleFile "$PREV_PATH/$SELECTION"        
     fi
 }
 
 up() {
     CUR_DIR=${PREV_PATH%/*}
-    CUR_DIR="${CUR_DIR%/*}/"
     echo "$CUR_DIR" > $PREV_PATH_FILE
     listFiles
 }
@@ -93,7 +92,7 @@ handleFile() {
 }
 
 back() {
-    CUR_DIR="${PREV_PATH%/*}/"
+    CUR_DIR="${PREV_PATH%/*}"
     listFiles
 }
 
@@ -119,6 +118,14 @@ deleteConfirm() {
     rm "${PREV_PATH}"
 }
 
+normalizeName() {
+    path=$1
+    if [ ! -f "$path" ] && [[ $path == */ ]]; then
+        path="${path%/*}"
+    fi
+    echo "$path"
+}
+
 ################################################################################
 # main
 ################################################################################
@@ -132,6 +139,7 @@ PREV_PATH_FILE="$PREV_PATH_FILE/rofi/file-browser/$PREV_PATH_FILE_NAME"
 ACTION=$(echo $ROFI_INFO | cut -d ';' -f1)
 SELECTION=$(echo $ROFI_INFO | cut -d ';' -f2)
 PREV_PATH=$(echo $ROFI_INFO | cut -d ';' -f3)
+PREV_PATH=$(normalizeName "$PREV_PATH")
 
 echo -en "\0prompt\x1f$ICON_PROMPT\n"
 echo -en "\0keep-selection\x1ffalse\n"
