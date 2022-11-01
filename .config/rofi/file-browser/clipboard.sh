@@ -18,10 +18,14 @@ PREV_PATH_FILE="$CONFIG/$PREV_PATH_FILE_NAME"
 
 main(){
     clip=$(copyq clipboard)
-    if [ -f "$clip" ]; then
-        handleFile "$clip"
-    elif [ -d "$clip" ]; then
-        handleFolder "$clip"
+
+    file=$(echo $clip | sed -e 's/^[[:space:]]*//')
+    file=${file/\~/$HOME}
+
+    if [ -f "$file" ]; then
+        handleFile "$file"
+    elif [ -d "$file" ]; then
+        handleFolder "$file"
     else
         fallback "$clip"
     fi
