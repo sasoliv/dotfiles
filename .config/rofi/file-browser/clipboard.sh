@@ -28,7 +28,7 @@ CONFIG="$CONFIG/rofi/file-browser"
 PREV_PATH_FILE="$CONFIG/$PREV_PATH_FILE_NAME"
 
 main(){
-    clip=$(copyq clipboard)
+    clip="$(copyq read)"
 
     path=$(echo $clip | sed -e 's/^[[:space:]]*//')
     pathNormalized=${path/\~/$HOME}
@@ -113,15 +113,15 @@ handleFolder() {
 }
 
 view() {
-    content=$1    
+    content=$1
+
+    if [ $KEEP_TEMP_FILES = false ]; then
+        rm -rf /tmp/clipboar-*
+    fi
 
     tempFile=$(mktemp /tmp/clipboar-XXX)
     echo "$content" > $tempFile
     $EDIT_COMMAND $tempFile
-
-    if [ $KEEP_TEMP_FILES = false ]; then
-        rm $tempFile
-    fi
 }
 
 main
