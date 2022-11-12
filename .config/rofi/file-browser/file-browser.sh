@@ -131,11 +131,9 @@ normalizeName() {
 # main
 ################################################################################
 
-PREV_PATH_FILE=$XDG_CONFIG_HOME
-if [ -z "$PREV_PATH_FILE" ]; then
-    PREV_PATH_FILE="$HOME/.config"
-fi
-PREV_PATH_FILE="$PREV_PATH_FILE/rofi/file-browser/$PREV_PATH_FILE_NAME"
+
+PREV_PATH_FILE=$(dirname ${BASH_SOURCE[0]})
+PREV_PATH_FILE="$PREV_PATH_FILE/$PREV_PATH_FILE_NAME"
 
 ACTION=$(echo $ROFI_INFO | cut -d ';' -f1)
 SELECTION=$(echo $ROFI_INFO | cut -d ';' -f2)
