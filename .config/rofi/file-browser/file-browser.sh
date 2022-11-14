@@ -132,7 +132,8 @@ normalizeName() {
 ################################################################################
 
 
-PREV_PATH_FILE=$(dirname ${BASH_SOURCE[0]})
+PREV_PATH_FILE=$(readlink -f "$0")
+PREV_PATH_FILE=$(dirname "$PREV_PATH_FILE")
 PREV_PATH_FILE="$PREV_PATH_FILE/$PREV_PATH_FILE_NAME"
 
 ACTION=$(echo $ROFI_INFO | cut -d ';' -f1)

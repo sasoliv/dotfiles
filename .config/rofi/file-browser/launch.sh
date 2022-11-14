@@ -1,4 +1,5 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
-loc=$(dirname ${BASH_SOURCE[0]})
-rofi -show fb -modi "fb:$loc/file-browser.sh" -theme "$loc/theme.rasi"
+LOC=$(readlink -f "$0")
+LOC=$(dirname "$LOC")
+rofi -show fb -modi "fb:$LOC/file-browser.sh" -theme "$LOC/theme.rasi"

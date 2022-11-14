@@ -1,4 +1,5 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
-loc=$(dirname ${BASH_SOURCE[0]})
-rofi -show drun -theme "$loc/theme.rasi"
+LOC=$(readlink -f "$0")
+LOC=$(dirname "$LOC")
+rofi -show drun -theme "$LOC/theme.rasi"

@@ -19,13 +19,9 @@ CANCEL=" cancel"
 
 
 
-CONFIG=$XDG_CONFIG_HOME
-if [ -z "$CONFIG" ]
-then
-    CONFIG="$HOME/.config"    
-fi
-CONFIG="$CONFIG/rofi/file-browser"
-PREV_PATH_FILE="$CONFIG/$PREV_PATH_FILE_NAME"
+LOC=$(readlink -f "$0")
+LOC=$(dirname "$LOC")
+PREV_PATH_FILE="$LOC/$PREV_PATH_FILE_NAME"
 
 main(){
     clip="$(copyq read)"
@@ -54,13 +50,13 @@ main(){
     action=""
     if [ $showMessage == true ];then
         action=$(echo -en "$options" \
-            | rofi -dmenu -theme "$CONFIG/theme.rasi" \
+            | rofi -dmenu -theme "$LOC/theme.rasi" \
             -p "$PROMPT" \
             -mesg "$icon $path" \
         )
     else
         action=$(echo -en "$options" \
-            | rofi -dmenu -theme "$CONFIG/theme.rasi" \
+            | rofi -dmenu -theme "$LOC/theme.rasi" \
             -p "$PROMPT" \
         )
     fi
@@ -93,7 +89,7 @@ handleFile() {
     echo "$folder" > $PREV_PATH_FILE
     export ROFI_INFO="BROWSE;$file;$folder"
 
-    $CONFIG/launch.sh
+    $LOC/launch.sh
 }
 
 handleFolder() {
@@ -109,7 +105,7 @@ handleFolder() {
 
     echo "$path" > $PREV_PATH_FILE
     export ROFI_INFO="BROWSE;$folder;$parent"
-    $CONFIG/launch.sh
+    $LOC/launch.sh
 }
 
 view() {
