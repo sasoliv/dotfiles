@@ -3,7 +3,8 @@
 OPEN_COMMAND="xdg-open"
 EDIT_COMMAND="subl"
 REMEMBER_PATH=true
-PREV_PATH_FILE_NAME="prev_path"
+
+PREV_PATH_FILE="$HOME/.local/share/rofi/file-browser/prev_path"
 
 ACTION_BROWSE="BROWSE"
 ACTION_UP="UP"
@@ -51,8 +52,10 @@ listFiles() {
     echo -en "$(ls --group-directories-first --color=never --almost-all $listLoc | buildEntry $CUR_DIR)"
 }
 
-init() {
-    if [ $REMEMBER_PATH = true ] && [ -f "$PREV_PATH_FILE" ]; then
+init() {    
+    if [ ! -d "${PREV_PATH_FILE%/*}" ]; then        
+        mkdir -p ${PREV_PATH_FILE%/*}
+    elif [ $REMEMBER_PATH = true ] && [ -f "$PREV_PATH_FILE" ]; then        
         CUR_DIR=$(cat $PREV_PATH_FILE)
         CUR_DIR=$(normalizeName $CUR_DIR)
     fi
@@ -130,11 +133,6 @@ normalizeName() {
 ################################################################################
 # main
 ################################################################################
-
-
-PREV_PATH_FILE=$(readlink -f "$0")
-PREV_PATH_FILE=$(dirname "$PREV_PATH_FILE")
-PREV_PATH_FILE="$PREV_PATH_FILE/$PREV_PATH_FILE_NAME"
 
 ACTION=$(echo $ROFI_INFO | cut -d ';' -f1)
 SELECTION=$(echo $ROFI_INFO | cut -d ';' -f2)

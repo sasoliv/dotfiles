@@ -7,22 +7,39 @@ end
 
 return require('packer').startup({
     function(use)
-        use('wbthomason/packer.nvim')
+        use 'wbthomason/packer.nvim'
 
-        use({
+        use {
             'doums/darcula',
             config = function()
                 vim.cmd[[colorscheme darcula]]
-            end,
-        })
+            end
+        }
         
-        use({ 
+        use { 
             'feline-nvim/feline.nvim',
             requires = 'kyazdani42/nvim-web-devicons',
             config = function()
                 require('feline').setup()
-            end,
-        })
+                require('feline').winbar.setup()
+            end
+        }
+
+        use {
+          'lewis6991/gitsigns.nvim',
+          config = function()
+            require('gitsigns').setup {
+                signs = {
+                    add          = { hl = 'GitSignsAdd'   , text = '│', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'    },
+                    change       = { hl = 'GitSignsChange', text = '│', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn' },
+                    delete       = { hl = 'GitSignsDelete', text = '', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn' },
+                    topdelete    = { hl = 'GitSignsDelete', text = '', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn' },
+                    changedelete = { hl = 'GitSignsChange', text = '~', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn' },
+                    untracked    = { hl = 'GitSignsAdd'   , text = '┆', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'    },
+                }
+            }
+          end
+        }
 
         if packer_bootstrap then
             require('packer').sync()
