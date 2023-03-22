@@ -15,7 +15,7 @@
 	],
 	"theme": "ayu-dark.sublime-theme",
 	"color_scheme": "Packages/Darkula Color Scheme/darkula.tmTheme",
-	"font_size": 10,
+	"font_size": 9,
 	"caret_style": "smooth",
 	"caret_extra_top": 0,
 	"caret_extra_bottom": 0,
