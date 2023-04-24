@@ -1,10 +1,10 @@
 title: "dashboard"
-subtitle: "pi"
+subtitle: "pluto"
 
-icon: "fab fa-raspberry-pi"
+icon: "fa-sharp fa-solid fa-globe"
 
 header: true
-footer: 'pi dashboard'
+footer: 'pluto dashboard'
 
 defaults:
   layout: columns

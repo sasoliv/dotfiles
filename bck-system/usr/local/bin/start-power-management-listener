@@ -15,8 +15,8 @@ import time
 
 from datetime import datetime
 
-host = "pi"
-topic = "pi/power"
+host = "pluto"
+topic = "pluto/power"
 
 modes = {
     "poweroff": lambda _: poweroff(),

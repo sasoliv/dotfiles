@@ -1,5 +1,5 @@
 [Unit]
-Description=Listens to pi/power topic on pi's mosquito MQTT broker
+Description=Listens to pluto/power topic on plutos's mosquito MQTT broker
 
 [Service]
 Type=simple
