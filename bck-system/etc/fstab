@@ -1,6 +1,19 @@
-proc            /proc           proc    defaults          0       0
-PARTUUID=9a7eea46-01  /boot           vfat    defaults          0       2
-PARTUUID=9a7eea46-02  /               ext4    defaults,noatime  0       1
+# /etc/fstab: static file system information.
+#
+# Use 'blkid' to print the universally unique identifier for a
+# device; this may be used with UUID= as a more robust way to name devices
+# that works even if disks are added and removed. See fstab(5).
+#
+# systemd generates mount units based on this file, see systemd.mount(5).
+# Please run 'systemctl daemon-reload' after making changes here.
+#
+# <file system> <mount point>   <type>  <options>       <dump>  <pass>
+# / was on /dev/nvme0n1p2 during installation
+UUID=80e63b69-d828-4737-9ab7-a87597188e2d /               ext4    errors=remount-ro 0       1
+# /boot/efi was on /dev/nvme0n1p1 during installation
+UUID=25A0-7BDE  /boot/efi       vfat    umask=0077      0       1
+# swap was on /dev/nvme0n1p3 during installation
+UUID=8790175c-6317-42fa-ade9-d27a02017cff none            swap    sw              0       0
+# data
 UUID=bbc776df-21e8-4b67-b751-f229cae627a6  /mnt/data        ext4    defaults          0       0
-# a swapfile is not a swap partition, no line here
-#   use  dphys-swapfile swap[on|off]  for that
+

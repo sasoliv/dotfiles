@@ -171,6 +171,7 @@ alias reboot='systemctl reboot'
 
 export FZF_DEFAULT_COMMAND='find *'
 export FZF_DEFAULT_OPTS='-i --color=hl:#00ff00,hl+:#00ff00 --height 50% --border'
+
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 neofetch
