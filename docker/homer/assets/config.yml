@@ -1,7 +1,7 @@
 title: "dashboard"
 subtitle: "pluto"
 
-icon: "fa-sharp fa-solid fa-globe"
+logo: "assets/pluto.png"
 
 header: true
 footer: 'pluto dashboard'
