@@ -166,6 +166,8 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
 alias update-pi='sudo apt update && sudo apt upgrade -y && sudo apt autoremove &&  $HOME/docker/update.sh'
+alias poweroff='systemctl poweroff'
+alias reboot='systemctl reboot'
 
 export FZF_DEFAULT_COMMAND='find *'
 export FZF_DEFAULT_OPTS='-i --color=hl:#00ff00,hl+:#00ff00 --height 50% --border'
