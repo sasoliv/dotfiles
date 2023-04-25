@@ -55,12 +55,12 @@ def exec(cmd):
 
 def poweroff():
     log("shuting down...")
-    exec("poweroff")
+    exec("systemctl poweroff")
 
 
 def reboot():
     log("rebooting...")
-    exec("reboot")
+    exec("systemctl reboot")
 
 
 if __name__ == '__main__':
