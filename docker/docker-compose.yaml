@@ -56,12 +56,30 @@ services:
     restart: unless-stopped
 
   node-exporter:
-    image: quay.io/prometheus/node-exporter:latest
+    image: quay.io/prometheus/node-exporter
     container_name: node-exporter
     command:
       - '--path.rootfs=/host'
     volumes:
       - '/:/host:ro,rslave'
+    restart: unless-stopped
+
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor
+    container_name: cadvisor
+    command:
+      - '-housekeeping_interval=10s'
+      - '-docker_only=true'
+    volumes:
+      - /:/rootfs:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker:/var/lib/docker:ro
+      - /sys/fs/cgroup:/cgroup:ro
+      - /dev/disk/:/dev/disk:ro
+    devices:
+      - /dev/kmsg:/dev/kmsg
     restart: unless-stopped
 
   pihole:
@@ -147,7 +165,7 @@ services:
     restart: unless-stopped
 
   ddclient:
-    image: linuxserver/ddclient:latest
+    image: linuxserver/ddclient
     container_name: ddclient
     environment:
       - PUID=1000
