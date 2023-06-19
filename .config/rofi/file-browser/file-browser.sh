@@ -3,8 +3,7 @@
 OPEN_COMMAND="xdg-open"
 EDIT_COMMAND="subl"
 REMEMBER_PATH=true
-
-PREV_PATH_FILE="$HOME/.local/share/rofi/file-browser/prev_path"
+PREV_PATH_FILE_NAME="prev_path"
 
 ACTION_BROWSE="BROWSE"
 ACTION_UP="UP"
@@ -42,7 +41,7 @@ buildEntry(){
 }
 
 listFiles() {
-    echo -en "\0message\x1f${CUR_DIR}/\n"
+    echo -en "\0message\x1f ${CUR_DIR}/\n"
     listLoc="/"
     if [ ! -z "$CUR_DIR" ]; then
         echo -en "$ICON_UP\0info\x1f${ACTION_UP};${ACTION_UP};${CUR_DIR}\n"
@@ -52,10 +51,8 @@ listFiles() {
     echo -en "$(ls --group-directories-first --color=never --almost-all $listLoc | buildEntry $CUR_DIR)"
 }
 
-init() {    
-    if [ ! -d "${PREV_PATH_FILE%/*}" ]; then        
-        mkdir -p ${PREV_PATH_FILE%/*}
-    elif [ $REMEMBER_PATH = true ] && [ -f "$PREV_PATH_FILE" ]; then        
+init() {
+    if [ $REMEMBER_PATH = true ] && [ -f "$PREV_PATH_FILE" ]; then
         CUR_DIR=$(cat $PREV_PATH_FILE)
         CUR_DIR=$(normalizeName $CUR_DIR)
     fi
@@ -86,7 +83,7 @@ up() {
 
 handleFile() {
     FILE="$1"
-    echo -en "\0message\x1f${FILE}\n"
+    echo -en "\0message\x1f ${FILE}\n"
 
     echo -en "$ICON_BACK back\0info\x1f${ACTION_BACK};${ACTION_BACK};${FILE}\n"
     echo -en "$ICON_OPEN open\0info\x1f${ACTION_OPEN};${ACTION_OPEN};${FILE}\n"
@@ -108,7 +105,7 @@ edit() {
 }
 
 delete() {
-    echo -en "\0message\x1f$ICON_DELETE ${PREV_PATH}\n"
+    echo -en "\0message\x1f $ICON_DELETE ${PREV_PATH}\n"
     echo -en "$ICON_CANCEL cancel\0info\x1f${ACTION_DELETE_CANCEL};${ACTION_DELETE_CANCEL};${PREV_PATH}\n"
     echo -en "$ICON_OK ok\0info\x1f${ACTION_DELETE_CONFIRM};${ACTION_DELETE_CONFIRM};${PREV_PATH}\n"
 }
@@ -132,7 +129,11 @@ normalizeName() {
 
 ################################################################################
 # main
+
 ################################################################################
+PREV_PATH_FILE=$(readlink -f "$0")
+PREV_PATH_FILE=$(dirname "$PREV_PATH_FILE")
+PREV_PATH_FILE="$PREV_PATH_FILE/$PREV_PATH_FILE_NAME"
 
 ACTION=$(echo $ROFI_INFO | cut -d ';' -f1)
 SELECTION=$(echo $ROFI_INFO | cut -d ';' -f2)

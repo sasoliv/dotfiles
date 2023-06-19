@@ -4,15 +4,20 @@ OPEN_COMMAND="xdg-open"
 EDIT_COMMAND="subl"
 PREV_PATH_FILE_NAME="prev_path"
 KEEP_TEMP_FILES=false
+WEB_COMMAND="google-chrome"
+WEB_SEARCH_URL="https://www.google.com/search?q="
 
 PROMPT=""
 ICON_FOLDER=""
 ICON_FILE=""
+ICON_WEB=" "
 
 OPEN=" open"
 EDIT=" edit"
 BROWSE=" browse"
 VIEW=" view in editor"
+WEB_SEARCH=" google search"
+WEB=" web"
 
 OK=" ok"
 CANCEL=" cancel"
@@ -43,16 +48,21 @@ main(){
         lineBreak="\n"
         icon="$ICON_FOLDER"
         showMessage=true
+    elif [[ $clip == https://* ]] || [[ $clip == http://* ]]; then
+        options="$WEB"
+        lineBreak="\n"
+        icon="$ICON_WEB"
+        showMessage=true
     fi
 
-    options="$options$lineBreak$VIEW"
+    options="$options$lineBreak$VIEW\n$WEB_SEARCH"
 
     action=""
     if [ $showMessage == true ];then
         action=$(echo -en "$options" \
             | rofi -dmenu -theme "$LOC/theme.rasi" \
             -p "$PROMPT" \
-            -mesg "$icon $path" \
+            -mesg " $icon $path" \
         )
     else
         action=$(echo -en "$options" \
@@ -65,7 +75,9 @@ main(){
         $OPEN) $OPEN_COMMAND "$pathNormalized" ;;
         $EDIT) $EDIT_COMMAND "$pathNormalized" ;;
         $BROWSE) browse "$pathNormalized" ;;
+        $WEB) $WEB_COMMAND "$clip" ;;
         $VIEW) view "$clip" ;;
+        $WEB_SEARCH) webSearch "$clip" ;;
         *) ;;
     esac
     
@@ -118,6 +130,12 @@ view() {
     tempFile=$(mktemp /tmp/clipboar-XXX)
     echo "$content" > $tempFile
     $EDIT_COMMAND $tempFile
+}
+
+webSearch() {
+    value=$1
+    value="${value// /+}"
+    $WEB_COMMAND $WEB_SEARCH_URL$value
 }
 
 main
