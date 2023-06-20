@@ -4,7 +4,7 @@ OPEN_COMMAND="xdg-open"
 EDIT_COMMAND="subl"
 PREV_PATH_FILE_NAME="prev_path"
 KEEP_TEMP_FILES=false
-WEB_COMMAND="google-chrome"
+WEB_COMMAND="google-chrome-stable"
 WEB_SEARCH_URL="https://www.google.com/search?q="
 
 PROMPT=""
