@@ -15,11 +15,11 @@ ACTION_DELETE_CONFIRM="DELETE_CONFIRM"
 ACTION_DELETE_CANCEL="DELETE_CANCEL"
 
 ICON_PROMPT=""
-ICON_UP=""
-ICON_BACK=""
-ICON_OPEN=""
-ICON_EDIT=""
-ICON_DELETE=""
+ICON_UP=" .."
+ICON_BACK=" .."
+ICON_OPEN=" open"
+ICON_EDIT=" edit"
+ICON_DELETE=" delete"
 ICON_CANCEL=""
 ICON_OK=""
 ICON_FOLDER=""
@@ -85,10 +85,10 @@ handleFile() {
     FILE="$1"
     echo -en "\0message\x1f ${FILE}\n"
 
-    echo -en "$ICON_BACK back\0info\x1f${ACTION_BACK};${ACTION_BACK};${FILE}\n"
-    echo -en "$ICON_OPEN open\0info\x1f${ACTION_OPEN};${ACTION_OPEN};${FILE}\n"
-    echo -en "$ICON_EDIT edit\0info\x1f${ACTION_EDIT};${ACTION_EDIT};${FILE}\n"
-    echo -en "$ICON_DELETE delete\0info\x1f${ACTION_DELETE};${ACTION_DELETE};${FILE}\n"
+    echo -en "$ICON_BACK\0info\x1f${ACTION_BACK};${ACTION_BACK};${FILE}\n"
+    echo -en "$ICON_OPEN\0info\x1f${ACTION_OPEN};${ACTION_OPEN};${FILE}\n"
+    echo -en "$ICON_EDIT\0info\x1f${ACTION_EDIT};${ACTION_EDIT};${FILE}\n"
+    echo -en "$ICON_DELETE\0info\x1f${ACTION_DELETE};${ACTION_DELETE};${FILE}\n"
 }
 
 back() {
