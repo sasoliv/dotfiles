@@ -13,18 +13,14 @@ def getOption(children, path = ""):
         if c['type'] == 'folder':
             result += (getOption(c['children'], path + "/" + c['name']) + "\n")
         elif c['type'] == 'url':
-            result += f"<b>{c['name']}</b>\t<span foreground=\"grey\" size=\"small\"><i>{c['url']}</i></span>\x00info\x1f{c['url']}\n"
-
-    return result.replace('&', '&#38;')
+            url=c['url']
+            result += f"{c['id']};{url}\n"
+  
+    return result
 
 if __name__ == "__main__":
-    if os.environ.get('ROFI_RETV') == '1':
-        subprocess.Popen(["google-chrome", os.environ['ROFI_INFO']], close_fds=True, start_new_session=True, stdout=subprocess.DEVNULL)
-    else:
         file = open(googleBookmarksFile)
         json = json.load(file)        
-        print("\x00prompt\x1f\n")
-        print("\0markup-rows\x1ftrue\n")
         options = getOption(json['roots']['bookmark_bar']['children'])
         options = os.linesep.join([s for s in options.splitlines() if s])
         print(options)

@@ -13,7 +13,7 @@ def getOption(children, path = ""):
         if c['type'] == 'folder':
             result += (getOption(c['children'], path + "/" + c['name']) + "\n")
         elif c['type'] == 'url':
-            result += f"<span foreground=\"grey\" size=\"small\">{path}</span>\t<b>{c['name']}</b>\t<span foreground=\"grey\" size=\"small\"><i>{c['url']}</i></span>\0info\x1f{c['url']}\n"
+            result += f"<span foreground=\"grey\" size=\"small\">{path}</span>\t<b>{c['name']}</b>\t<span foreground=\"grey\" size=\"small\"><i>{c['url']}</i></span>\0info\x1f{c['url']}\x1ficon\x1frofi-bookmarks-{c['id']}\n"
 
     return result.replace('&', '&#38;')
 
