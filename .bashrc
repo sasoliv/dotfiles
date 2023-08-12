@@ -115,5 +115,11 @@ export FZF_DEFAULT_COMMAND='find .'
 export FZF_DEFAULT_OPTS='-i --color=hl:#00ff00,hl+:#00ff00 --height 50% --border'
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
+source "$HOME/.sdkman/bin/sdkman-init.sh"
+
 # <-- sources
 ################################################################################
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
