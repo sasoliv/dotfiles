@@ -1,0 +1,16 @@
+#!/usr/bin/env sh
+
+jump () {
+    local locations="~\n~/Desktop\n~/.config"
+    local selection=$(echo -e "$locations" | fzf)
+    __jumpTo $selection
+}
+
+__jumpTo() {
+    local selection=$1
+    if [ ! -z "$selection" ]
+    then
+        selection=${selection/\~/$HOME}
+        cd "$selection"
+    fi
+}
