@@ -1,0 +1,26 @@
+- logo:
+    icon: /images/pluto.png
+
+- resources:
+    cpu: true
+    memory: true
+    cputemp: true
+    uptime: true
+    units: metric
+
+- resources:
+    disk: /pluto/mnt/data
+
+- openmeteo:
+    latitude: 38.736946
+    longitude: -9.142685
+    timezone: Europe/Kiev
+    units: metric
+    cache: 5
+
+- datetime:
+    format:
+        dateStyle: long
+        timeStyle: short
+        hour12: false
+

@@ -1,6 +1,18 @@
 version: "3.5"
 services:
 
+  homepage:
+    image: homepage-local
+    build:
+        context: ./homepage
+    container_name: homepage
+    environment:
+      PUID: 1000
+      PGID: 1000
+    volumes:
+      - /mnt/data:/pluto/mnt/data:ro
+    restart: unless-stopped
+
   nginx:
     image: nginx-local
     build:
@@ -11,18 +23,6 @@ services:
      - 443:443
     volumes:
      - /mnt/data/config/nginx:/config
-    restart: unless-stopped
-
-  homer:
-    image: homer-local
-    build:
-      context: ./homer
-    container_name: homer
-    environment:
-      - UID=1000
-      - GID=1000
-    volumes:
-      - homer-data:/www/assets
     restart: unless-stopped
 
   portainer:

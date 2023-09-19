@@ -1,0 +1,27 @@
+- apps:
+    - qBittorrent:
+        icon: qbittorrent.png
+        href: https://pluto/qbittorrent
+        ping: https://pluto/qbittorrent
+    - Jellyfin:
+        icon: jellyfin.png
+        href: https://pluto/jellyfin
+        ping: https://pluto/jellyfin
+    - File Browser:
+        icon: filebrowser.png
+        href: https://pluto/filebrowser
+        ping: https://pluto/filebrowser
+
+- admin:
+    - Portainer:
+        icon: portainer.png
+        href: https://pluto/portainer
+        ping: https://pluto/portainer
+    - Grafana:
+        icon: grafana.png
+        href: https://pluto/grafana
+        ping: https://pluto/grafana
+    - Pi-hole:
+        icon: pi-hole.png
+        href: https://pluto/pihole
+        ping: https://pluto/pihole
