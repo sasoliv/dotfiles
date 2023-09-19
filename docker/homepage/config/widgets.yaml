@@ -2,13 +2,27 @@
     icon: /images/pluto.png
 
 - resources:
+    label: cpu usage
     cpu: true
+
+- resources:
+    label: mem
     memory: true
+
+- resources:
+    label: cpu temp
     cputemp: true
-    uptime: true
     units: metric
 
 - resources:
+    label: uptime
+    uptime: true
+
+- resources:
+    label: /
+    disk: /
+- resources:
+    label: /mnt/data
     disk: /pluto/mnt/data
 
 - openmeteo:
