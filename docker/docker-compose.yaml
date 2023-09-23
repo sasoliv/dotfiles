@@ -91,7 +91,7 @@ services:
       - WEBUI_PORT=8090
     volumes:
       - /mnt/data/config/qbittorrent_config:/config
-      - /mnt/data/downloads:/downloads
+      - /mnt/data/data:/data
     ports:
       - 6881:6881
       - 6881:6881/udp
@@ -107,7 +107,7 @@ services:
     volumes:
       - /mnt/data/config/jellyfin_config:/config
       - /mnt/data/config/jellyfin_cache:/cache
-      - /mnt/data/media:/media    
+      - /mnt/data/data/media:/media
     ports:
       - 8920:8920
       - 1900:1900/udp
