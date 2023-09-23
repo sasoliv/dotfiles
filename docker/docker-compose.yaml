@@ -11,6 +11,8 @@ services:
       PGID: 1000
     volumes:
       - /mnt/data:/pluto/mnt/data:ro
+    secrets:
+        - homepage-portainer-api-key
     restart: unless-stopped
 
   nginx:
@@ -214,3 +216,6 @@ volumes:
   homer-data:
     driver: local
 
+secrets:
+    homepage-portainer-api-key:
+        file: /mnt/data/secrets/homepage/portainer-api-key

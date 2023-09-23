@@ -3,22 +3,25 @@
         icon: qbittorrent.png
         href: https://pluto/qbittorrent
         ping: https://pluto/qbittorrent
-    - Jackett:
-        icon: jackett.png
-        href: https://pluto/jackett
-        ping: https://pluto/jackett
-    - Radarr:
-        icon: radarr.png
-        href: https://pluto/radarr
-        ping: https://pluto/radarr
-    - Sonarr:
-        icon: sonarr.png
-        href: https://pluto/sonarr
-        ping: https://pluto/sonarr
+        widget:
+            type: qbittorrent
+            url: https://pluto/qbittorrent
     - Jellyfin:
         icon: jellyfin.png
         href: https://pluto/jellyfin
         ping: https://pluto/jellyfin
+    - Sonarr:
+        icon: sonarr.png
+        href: https://pluto/sonarr
+        ping: https://pluto/sonarr
+    - Radarr:
+        icon: radarr.png
+        href: https://pluto/radarr
+        ping: https://pluto/radarr
+    - Jackett:
+        icon: jackett.png
+        href: https://pluto/jackett
+        ping: https://pluto/jackett
     - File Browser:
         icon: filebrowser.png
         href: https://pluto/filebrowser
@@ -29,11 +32,17 @@
         icon: portainer.png
         href: https://pluto/portainer
         ping: https://pluto/portainer
+        widget:
+            type: portainer
+            url: https://pluto/portainer
+            env: 2
+            key: $homepage-portainer-api-key
+    - Pi-hole:
+        icon: pi-hole.png
+        href: https://pluto/pihole/admin
+        ping: https://pluto/pihole/admin
     - Grafana:
         icon: grafana.png
         href: https://pluto/grafana
         ping: https://pluto/grafana
-    - Pi-hole:
-        icon: pi-hole.png
-        href: https://pluto/pihole
-        ping: https://pluto/pihole
+
