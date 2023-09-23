@@ -3,6 +3,10 @@
         icon: qbittorrent.png
         href: https://pluto/qbittorrent
         ping: https://pluto/qbittorrent
+    - Radarr:
+        icon: radarr.png
+        href: https://pluto/radarr
+        ping: https://pluto/radarr
     - Sonarr:
         icon: sonarr.png
         href: https://pluto/sonarr

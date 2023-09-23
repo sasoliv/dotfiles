@@ -185,6 +185,18 @@ services:
       - /mnt/data/data:/data
     restart: unless-stopped
 
+  radarr:
+    image: lscr.io/linuxserver/radarr:latest
+    container_name: radarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Lisbon
+    volumes:
+      - /mnt/data/config/radarr:/config
+      - /mnt/data/data:/data
+    restart: unless-stopped
+
 volumes:
   homer-data:
     driver: local
