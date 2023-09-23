@@ -3,6 +3,10 @@
         icon: qbittorrent.png
         href: https://pluto/qbittorrent
         ping: https://pluto/qbittorrent
+    - Sonarr:
+        icon: sonarr.png
+        href: https://pluto/sonarr
+        ping: https://pluto/sonarr
     - Jellyfin:
         icon: jellyfin.png
         href: https://pluto/jellyfin

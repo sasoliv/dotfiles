@@ -152,7 +152,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=Europe/London
+      - TZ=Europe/Lisbon
     volumes:
       - /mnt/data/config/ddclient:/config
     restart: unless-stopped
@@ -171,6 +171,18 @@ services:
     volumes:
       - /mnt/data:/mnt/data:z
     command: '-s "data;/mnt/data;yes;no;yes" -u "saso;saso"'
+    restart: unless-stopped
+
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:latest
+    container_name: sonarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Lisbon
+    volumes:
+      - /mnt/data/config/sonarr:/config
+      - /mnt/data/data:/data
     restart: unless-stopped
 
 volumes:
