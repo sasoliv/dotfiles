@@ -3,6 +3,10 @@
         icon: qbittorrent.png
         href: https://pluto/qbittorrent
         ping: https://pluto/qbittorrent
+    - Jackett:
+        icon: jackett.png
+        href: https://pluto/jackett
+        ping: https://pluto/jackett
     - Radarr:
         icon: radarr.png
         href: https://pluto/radarr
