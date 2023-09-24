@@ -22,6 +22,9 @@
         icon: jackett.png
         href: https://pluto/jackett
         ping: https://pluto/jackett
+        widget:
+            type: jackett
+            url: https://pluto/jackett
     - File Browser:
         icon: filebrowser.png
         href: https://pluto/filebrowser
