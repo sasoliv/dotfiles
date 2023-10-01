@@ -18,13 +18,14 @@
         icon: radarr.png
         href: https://pluto/radarr
         ping: https://pluto/radarr
-    - Jackett:
-        icon: jackett.png
-        href: https://pluto/jackett
-        ping: https://pluto/jackett
+    - Prowlarr:
+        icon: prowlarr.png
+        href: https://pluto/prowlarr
+        ping: https://pluto/prowlarr
         widget:
-            type: jackett
-            url: https://pluto/jackett
+            type: prowlarr
+            url: https://pluto/prowlarr
+            key: $homepage-prowlarr-api-key
     - File Browser:
         icon: filebrowser.png
         href: https://pluto/filebrowser

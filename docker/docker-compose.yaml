@@ -13,6 +13,7 @@ services:
       - /mnt/data:/pluto/mnt/data:ro
     secrets:
         - homepage-portainer-api-key
+        - homepage-prowlarr-api-key
     restart: unless-stopped
 
   nginx:
@@ -175,17 +176,15 @@ services:
     command: '-s "data;/mnt/data;yes;no;yes" -u "saso;saso"'
     restart: unless-stopped
 
-  jackett:
-    image: lscr.io/linuxserver/jackett:latest
-    container_name: jackett
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:latest
+    container_name: prowlarr
     environment:
       - PUID=1000
       - PGID=1000
       - TZ=Europe/Lisbon
-      - AUTO_UPDATE=true
     volumes:
-      - /mnt/data/config/jackett:/config
-      - /mnt/data/data/downloads:/downloads
+      - /mnt/data/config/prowlarr:/config
     restart: unless-stopped
 
   sonarr:
@@ -219,3 +218,5 @@ volumes:
 secrets:
     homepage-portainer-api-key:
         file: /mnt/data/secrets/homepage/portainer-api-key
+    homepage-prowlarr-api-key:
+        file: /mnt/data/secrets/homepage/prowlarr-api-key
