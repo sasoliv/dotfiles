@@ -118,5 +118,6 @@ export FZF_DEFAULT_OPTS='-i --color=hl:#00ff00,hl+:#00ff00 --height 50% --border
 
 [ -f ~/.config/fzf/jump ] && source ~/.config/fzf/jump
 
+. "$HOME/.cargo/env"
 # <-- sources
 ################################################################################
