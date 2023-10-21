@@ -3,7 +3,7 @@
 LOC=$(readlink -f "$0")
 LOC=$(dirname "$LOC")
 CONFIG_FILE="$LOC/config.json"
-BROWSER="google-chrome-stable"
+BROWSER="brave"
 
 options=$($LOC/search.py "$CONFIG_FILE" list-services)
 service=$(echo -en "$options" | rofi -dmenu -p " " -mesg 'search on' -theme $LOC/theme.rasi)
