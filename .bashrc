@@ -80,7 +80,7 @@ __build-ps1() {
     bg['git']=$bgYellow
     fg['git']=$fgYellow
 
-    local splitter=''
+    local splitter=''
     local result=''
     local prev=''
     for key in "${order[@]}"; do
