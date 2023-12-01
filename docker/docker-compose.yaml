@@ -13,7 +13,6 @@ services:
       - /mnt/data:/pluto/mnt/data:ro
     secrets:
         - homepage-portainer-api-key
-        - homepage-prowlarr-api-key
     restart: unless-stopped
 
   nginx:
@@ -218,5 +217,4 @@ volumes:
 secrets:
     homepage-portainer-api-key:
         file: /mnt/data/secrets/homepage/portainer-api-key
-    homepage-prowlarr-api-key:
-        file: /mnt/data/secrets/homepage/prowlarr-api-key
+

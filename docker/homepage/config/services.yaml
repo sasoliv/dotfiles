@@ -22,10 +22,6 @@
         icon: prowlarr.png
         href: https://pluto/prowlarr
         ping: https://pluto/prowlarr
-        widget:
-            type: prowlarr
-            url: https://pluto/prowlarr
-            key: $homepage-prowlarr-api-key
     - File Browser:
         icon: filebrowser.png
         href: https://pluto/filebrowser
