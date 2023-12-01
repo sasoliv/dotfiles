@@ -122,5 +122,10 @@ export FZF_DEFAULT_OPTS='-i --color=hl:#00ff00,hl+:#00ff00 --height 50% --border
 [ -f ~/.config/fzf/jump ] && source ~/.config/fzf/jump
 
 . "$HOME/.cargo/env"
+
+
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
 # <-- sources
 ################################################################################
