@@ -48,7 +48,7 @@ if __name__ == '__main__':
 
     log("init...")
 
-    client = paho.Client()
+    client = paho.Client(paho.CallbackAPIVersion.VERSION2)
     client.on_message = on_message
 
     client.connect(host, 1883, 60)
