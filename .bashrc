@@ -16,7 +16,7 @@ alias ls='ls --color=auto'
 alias grep='grep --colour=auto'
 alias egrep='egrep --colour=auto'
 alias fgrep='fgrep --colour=auto'
-alias cdd='lf -last-dir-path $HOME/.config/lf/last-dir-path && cd $(cat $HOME/.config/lf/last-dir-path)'
+#alias cdd='lf -last-dir-path $HOME/.config/lf/last-dir-path && cd $(cat $HOME/.config/lf/last-dir-path)'
 alias ll='exa -la --group --group-directories-first'
 alias catt='bat'
 alias vim=nvim
@@ -28,6 +28,15 @@ alias ......='cd ../../../../..'
 alias .......='cd ../../../../../..'
 alias ........='cd ../../../../../../..'
 alias sb=subl
+
+function cdd() {
+    local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+    yazi "$@" --cwd-file="$tmp"
+    if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+        builtin cd -- "$cwd"
+    fi
+    rm -f -- "$tmp"
+}
 
 burn-iso() {
     if [ "$#" -ne 2 ]; then
