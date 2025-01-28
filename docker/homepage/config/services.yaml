@@ -22,6 +22,10 @@
         icon: prowlarr.png
         href: https://pluto/prowlarr
         ping: https://pluto/prowlarr
+    - Bazarr:
+        icon: bazarr.png
+        href: https://pluto/bazarr
+        ping: https://pluto/bazarr
     - File Browser:
         icon: filebrowser.png
         href: https://pluto/filebrowser
