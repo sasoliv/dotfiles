@@ -8,6 +8,7 @@ services:
     environment:
       PUID: 1000
       PGID: 1000
+      HOMEPAGE_ALLOWED_HOSTS: pluto
     volumes:
       - /mnt/data:/pluto/mnt/data:ro
     secrets:
@@ -64,7 +65,7 @@ services:
     restart: unless-stopped
 
   pihole:
-    image: pihole/pihole
+    image: pihole/pihole:2024.07.0
     container_name: pihole
     hostname: pihole.pluto
     environment:
