@@ -14,10 +14,9 @@ export VISUAL=subl
 # alias & functions -->
 alias ls='ls --color=auto'
 alias grep='grep --colour=auto'
-alias egrep='egrep --colour=auto'
-alias fgrep='fgrep --colour=auto'
-#alias cdd='lf -last-dir-path $HOME/.config/lf/last-dir-path && cd $(cat $HOME/.config/lf/last-dir-path)'
-alias ll='exa -la --group --group-directories-first'
+
+alias ll='eza -la --group --group-directories-first'
+
 alias catt='bat'
 alias vim=nvim
 alias ..='cd ..'
@@ -48,14 +47,6 @@ burn-iso() {
         echo "##########################################################"
     else
         sudo dd if=$1 of=$2 bs=4M conv=fsync oflag=direct status=progress
-    fi
-}
-
-sbf() {
-    local files=$(fzf -m --preview 'bat --style=numbers --color=always --line-range :500 {}')
-    if [ ! -z "$files" ]
-    then
-        subl $files
     fi
 }
 
@@ -97,10 +88,10 @@ __build-ps1() {
     local result=''
     local prev=''
     for key in "${order[@]}"; do
-        if [ -z "${values[$key]}" ]; then            
+        if [ -z "${values[$key]}" ]; then
             continue
         fi
-        
+
         if [ -z "$prev" ]; then
             result="${fgBlack}${bg[$key]} ${prefixes[$key]}${values[$key]}"
         else
@@ -123,18 +114,3 @@ PROMPT_COMMAND=set_bash_prompt
 # sources -->
 
 source ~/sources/git/contrib/completion/git-completion.bash
-
-export FZF_DEFAULT_COMMAND='find .'
-export FZF_DEFAULT_OPTS='-i --color=hl:#00ff00,hl+:#00ff00 --height 50% --border'
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
-[ -f ~/.config/fzf/jump ] && source ~/.config/fzf/jump
-
-. "$HOME/.cargo/env"
-
-
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-
-# <-- sources
-################################################################################
