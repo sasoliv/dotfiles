@@ -114,3 +114,6 @@ PROMPT_COMMAND=set_bash_prompt
 # sources -->
 
 source ~/sources/git/contrib/completion/git-completion.bash
+
+export FZF_DEFAULT_OPTS='-i --color=hl:#00ff00,hl+:#00ff00 --height 50% --border'
+eval "$(fzf --bash)"
