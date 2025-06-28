@@ -14,10 +14,9 @@ export VISUAL=subl
 # alias & functions -->
 alias ls='ls --color=auto'
 alias grep='grep --colour=auto'
-alias egrep='egrep --colour=auto'
-alias fgrep='fgrep --colour=auto'
-alias cdd='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
-alias ll='exa -la --group --group-directories-first'
+
+alias ll='eza -la --group --group-directories-first'
+
 alias catt='bat'
 alias vim=nvim
 alias ..='cd ..'
@@ -29,21 +28,25 @@ alias .......='cd ../../../../../..'
 alias ........='cd ../../../../../../..'
 alias sb=subl
 
-burn-iso() {
-    if [ "$#" -ne 2 ]; then
-        echo "usage: ${FUNCNAME[0]} <path-to-iso> <device>"
-        echo "example: ${FUNCNAME[0]} ~/my-iso.iso /dev/sdd"
-        echo "check devices: sudo fdisk -l"
-    else
-        sudo dd if=$1 of=$2 bs=4M conv=fsync oflag=direct status=progress
+function cdd() {
+    local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+    yazi "$@" --cwd-file="$tmp"
+    if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+        builtin cd -- "$cwd"
     fi
+    rm -f -- "$tmp"
 }
 
-sbf() {
-    local files=$(fzf -m --preview 'bat --style=numbers --color=always --line-range :500 {}')
-    if [ ! -z "$files" ]
-    then
-        subl $files
+burn-iso() {
+    if [ "$#" -ne 2 ]; then
+        echo "##########################################################"
+        echo "usage: ${FUNCNAME[0]} <path-to-iso> <device>"
+        echo "example: ${FUNCNAME[0]} ~/my-iso.iso /dev/sdd"
+        echo "##########################################################"
+        lsblk -o name,mountpoint,label,size,uuid,model
+        echo "##########################################################"
+    else
+        sudo dd if=$1 of=$2 bs=4M conv=fsync oflag=direct status=progress
     fi
 }
 
@@ -80,14 +83,15 @@ __build-ps1() {
     bg['git']=$bgYellow
     fg['git']=$fgYellow
 
+    #local splitter=''
     local splitter=''
     local result=''
     local prev=''
     for key in "${order[@]}"; do
-        if [ -z "${values[$key]}" ]; then            
+        if [ -z "${values[$key]}" ]; then
             continue
         fi
-        
+
         if [ -z "$prev" ]; then
             result="${fgBlack}${bg[$key]} ${prefixes[$key]}${values[$key]}"
         else
@@ -111,15 +115,5 @@ PROMPT_COMMAND=set_bash_prompt
 
 source ~/sources/git/contrib/completion/git-completion.bash
 
-export FZF_DEFAULT_COMMAND='find .'
 export FZF_DEFAULT_OPTS='-i --color=hl:#00ff00,hl+:#00ff00 --height 50% --border'
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
-source "$HOME/.sdkman/bin/sdkman-init.sh"
-
-# <-- sources
-################################################################################
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+eval "$(fzf --bash)"

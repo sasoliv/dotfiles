@@ -5,7 +5,7 @@ import os
 from pathlib import Path
 import subprocess
 
-bookmarksFile = Path.home() / '.config/BraveSoftware/Brave-Browser/Default/Bookmarks'
+googleBookmarksFile = Path.home() / '.config/google-chrome/Default/Bookmarks'
 
 def getOption(children, path = ""):
     result = ""
@@ -19,7 +19,7 @@ def getOption(children, path = ""):
     return result
 
 if __name__ == "__main__":
-        file = open(bookmarksFile)
+        file = open(googleBookmarksFile)
         json = json.load(file)        
         options = getOption(json['roots']['bookmark_bar']['children'])
         options = os.linesep.join([s for s in options.splitlines() if s])

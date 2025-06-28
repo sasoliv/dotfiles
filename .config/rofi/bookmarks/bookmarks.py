@@ -5,8 +5,7 @@ import os
 from pathlib import Path
 import subprocess
 
-bookmarksFile = Path.home() / '.config/BraveSoftware/Brave-Browser/Default/Bookmarks'
-browser='brave'
+googleBookmarksFile = Path.home() / '.config/google-chrome/Default/Bookmarks'
 
 def getOption(children, path = ""):
     result = ""
@@ -20,9 +19,9 @@ def getOption(children, path = ""):
 
 if __name__ == "__main__":
     if os.environ.get('ROFI_RETV') == '1':
-        subprocess.Popen([browser, os.environ['ROFI_INFO']], close_fds=True, start_new_session=True, stdout=subprocess.DEVNULL)
+        subprocess.Popen(["google-chrome-stable", os.environ['ROFI_INFO']], close_fds=True, start_new_session=True, stdout=subprocess.DEVNULL)
     else:
-        file = open(bookmarksFile)
+        file = open(googleBookmarksFile)
         json = json.load(file)        
         print("\0prompt\x1f \n")
         print("\0markup-rows\x1ftrue\n")
