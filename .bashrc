@@ -166,7 +166,7 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
-alias pluto-update='sudo apt update && sudo apt upgrade -y && sudo apt autoremove &&  $HOME/docker/update.sh'
+alias pluto-update='sudo nala update && sudo nala upgrade -y && sudo nala autoremove -y && $HOME/docker/update.sh'
 alias poweroff='systemctl poweroff'
 alias reboot='systemctl reboot'
 
