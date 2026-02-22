@@ -74,7 +74,6 @@ services:
       TZ: Europe/Lisbon
     volumes:
       - /mnt/data/config/pihole/etc-pihole/:/etc/pihole/
-      - /mnt/data/config/pihole/etc-dnsmasq.d/:/etc/dnsmasq.d/
     ports:
       - 53:53/tcp
       - 53:53/udp
