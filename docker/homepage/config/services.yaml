@@ -43,8 +43,8 @@
             key: $homepage-portainer-api-key
     - Pi-hole:
         icon: pi-hole.png
-        href: https://pluto/pihole/admin
-        ping: https://pluto/pihole/admin
+        href: https://pihole.pluto/admin
+        ping: https://pihole.pluto/admin
     - Grafana:
         icon: grafana.png
         href: https://pluto/grafana
