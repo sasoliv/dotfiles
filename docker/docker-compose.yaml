@@ -67,7 +67,7 @@ services:
     restart: unless-stopped
 
   pihole:
-    image: pihole/pihole:2024.07.0
+    image: pihole/pihole
     container_name: pihole
     hostname: pihole.pluto
     environment:
