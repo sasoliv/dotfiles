@@ -1,0 +1,16 @@
+[req]
+distinguished_name = dn
+x509_extensions = v3_req
+prompt = no
+
+[dn]
+CN = $domain
+
+[v3_req]
+keyUsage = digitalSignature, keyEncipherment
+extendedKeyUsage = serverAuth
+subjectAltName = @alt_names
+
+[alt_names]
+DNS.1 = $domain
+
