@@ -47,6 +47,6 @@
         ping: https://pihole.pluto/admin
     - Grafana:
         icon: grafana.png
-        href: https://pluto/grafana
-        ping: https://pluto/grafana
+        href: https://grafana.pluto
+        ping: https://grafana.pluto
 
