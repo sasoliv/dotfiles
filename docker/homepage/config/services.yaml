@@ -1,11 +1,11 @@
 - apps:
     - qBittorrent:
         icon: qbittorrent.png
-        href: https://pluto/qbittorrent
-        ping: https://pluto/qbittorrent
+        href: https://qbittorrent.pluto
+        ping: https://qbittorrent.pluto
         widget:
             type: qbittorrent
-            url: https://pluto/qbittorrent
+            url: https://qbittorrent.pluto
     - Jellyfin:
         icon: jellyfin.png
         href: https://jellyfin.pluto
