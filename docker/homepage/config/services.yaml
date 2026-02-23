@@ -12,33 +12,33 @@
         ping: https://jellyfin.pluto
     - Sonarr:
         icon: sonarr.png
-        href: https://pluto/sonarr
-        ping: https://pluto/sonarr
+        href: https://sonarr.pluto
+        ping: https://sonarr.pluto
     - Radarr:
         icon: radarr.png
-        href: https://pluto/radarr
-        ping: https://pluto/radarr
+        href: https://radarr.pluto
+        ping: https://radarr.pluto
     - Prowlarr:
         icon: prowlarr.png
-        href: https://pluto/prowlarr
-        ping: https://pluto/prowlarr
+        href: https://prowlarr.pluto
+        ping: https://prowlarr.pluto
     - Bazarr:
         icon: bazarr.png
-        href: https://pluto/bazarr
-        ping: https://pluto/bazarr
+        href: https://bazarr.pluto
+        ping: https://bazarr.pluto
     - File Browser:
         icon: filebrowser.png
-        href: https://pluto/filebrowser
-        ping: https://pluto/filebrowser
+        href: https://filebrowser.pluto
+        ping: https://filebrowser.pluto
 
 - admin:
     - Portainer:
         icon: portainer.png
-        href: https://pluto/portainer
-        ping: https://pluto/portainer
+        href: https://portainer.pluto
+        ping: https://portainer.pluto
         widget:
             type: portainer
-            url: https://pluto/portainer
+            url: https://portainer.pluto
             env: 2
             key: $homepage-portainer-api-key
     - Pi-hole:
