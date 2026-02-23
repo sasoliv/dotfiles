@@ -25,6 +25,8 @@ services:
      - 443:443
     volumes:
      - /mnt/data/config/nginx:/config
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     restart: unless-stopped
 
   portainer:
@@ -223,6 +225,19 @@ services:
     volumes:
       - /mnt/data/config/bazarr:/config
       - /mnt/data/data:/data
+    restart: unless-stopped
+
+  homeassistant:
+    image: ghcr.io/home-assistant/home-assistant:stable
+    container_name: homeassistant
+    environment:
+      TZ: Europe/Lisbon
+    volumes:
+      - /mnt/data/config/homeassistant/config:/config
+      - /etc/localtime:/etc/localtime:ro
+      - /run/dbus:/run/dbus:ro
+    privileged: true
+    network_mode: host
     restart: unless-stopped
 
 secrets:

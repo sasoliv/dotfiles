@@ -49,4 +49,8 @@
         icon: grafana.png
         href: https://grafana.pluto
         ping: https://grafana.pluto
+    - Home Assistant:
+        icon: home-assistant.png
+        href: https://homeassistant.pluto
+        ping: https://homeassistant.pluto
 
