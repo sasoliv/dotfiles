@@ -103,7 +103,7 @@ services:
     container_name: jellyfin
     hostname: jellyfin.pluto
     environment:
-      - JELLYFIN_PublishedServerUrl=http://pluto/jellyfin
+      - JELLYFIN_PublishedServerUrl=https://jellyfin.pluto
     user: 1000:1000
     group_add:
       - "105" # Change this to match your "render": "getent group render | cut -d: -f3"
