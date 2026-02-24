@@ -243,6 +243,14 @@ services:
     network_mode: host
     restart: unless-stopped
 
+  matter:
+    image: ghcr.io/home-assistant-libs/python-matter-server:8.0.0
+    container_name: matter
+    volumes:
+      - /run/dbus:/run/dbus:ro
+    network_mode: host
+    restart: unless-stopped
+
 secrets:
     homepage-portainer-api-key:
         file: /mnt/data/secrets/homepage/portainer-api-key
