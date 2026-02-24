@@ -236,6 +236,9 @@ services:
       - /mnt/data/config/homeassistant/config:/config
       - /etc/localtime:/etc/localtime:ro
       - /run/dbus:/run/dbus:ro
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
     privileged: true
     network_mode: host
     restart: unless-stopped
