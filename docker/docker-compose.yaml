@@ -251,6 +251,18 @@ services:
     network_mode: host
     restart: unless-stopped
 
+  gotify:
+    image: gotify/server
+    container_name: gotify
+    environment:
+      GOTIFY_SERVER_CORS_ALLOWORIGINS: |
+        - "gotify"
+        - "gotify.pluto"
+      GOTIFY_DEFAULTUSER_PASS: 'admin'
+    volumes:
+      - /mnt/data/config/gotify/data:/app/data
+    restart: unless-stopped
+
 secrets:
     homepage-portainer-api-key:
         file: /mnt/data/secrets/homepage/portainer-api-key

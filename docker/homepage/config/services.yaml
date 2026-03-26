@@ -53,4 +53,8 @@
         icon: home-assistant.png
         href: https://homeassistant.pluto
         ping: https://homeassistant.pluto
+    - Gotify:
+        icon: gotify.png
+        href: https://gotify.pluto
+        ping: https://gotify.pluto
 
