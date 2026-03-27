@@ -93,7 +93,7 @@ services:
       - TZ=Europe/Lisbon
       - WEBUI_PORT=8090
     volumes:
-      - /mnt/data/config/qbittorrent_config:/config
+      - /mnt/data/config/qbittorrent/config:/config
       - /mnt/data/data:/data
     ports:
       - 6881:6881
