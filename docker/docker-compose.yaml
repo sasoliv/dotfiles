@@ -85,7 +85,9 @@ services:
     restart: unless-stopped
 
   qbittorrent:
-    image: linuxserver/qbittorrent
+    image: qbittorrent-local
+    build:
+      context: ./qbittorrent
     container_name: qbittorrent
     environment:
       - PUID=1000
