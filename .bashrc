@@ -74,7 +74,7 @@ __build-ps1() {
 
     local order=("path" "git" )
 
-    values['path']="${PWD/$HOME/' '}"
+    values['path']="${PWD/$HOME/' '}"
     bg['path']=$bgBlue
     fg['path']=$fgBlue
 
