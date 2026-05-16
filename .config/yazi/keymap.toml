@@ -1,0 +1,4 @@
+[mgr]
+append_keymap = [
+    { on = [ "<C-Enter>" ], run = "shell 'subl $@'", desc = "Sublime" },
+]
