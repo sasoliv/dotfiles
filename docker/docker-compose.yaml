@@ -33,7 +33,7 @@ services:
     image: portainer/portainer-ce
     container_name: portainer
     environment:
-      - TRUSTED_ORIGINS=portainer.pluto
+      - TRUSTED_ORIGINS=https://portainer.pluto
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /mnt/data/config/portainer/data:/data
