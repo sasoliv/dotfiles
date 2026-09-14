@@ -50,6 +50,8 @@ burn-iso() {
     fi
 }
 
+[[ -d "$HOME/.local/bin" ]] && export PATH="$HOME/.local/bin:$PATH"
+
 # <-- alias & functions
 ################################################################################
 # PS1 -->
