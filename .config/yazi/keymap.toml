@@ -1,4 +1,4 @@
-[mgr]
-append_keymap = [
-    { on = [ "<C-Enter>" ], run = "shell 'subl $@'", desc = "Sublime" },
-]
+[[mgr.prepend_keymap]]
+on = ["e"]
+run = "shell 'subl %h' --orphan"
+desc = "Open selected file(s) in Sublime Text"
